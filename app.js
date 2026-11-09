@@ -5,20 +5,10 @@
 (function () {
   'use strict';
 
-  const PUBLIC_TUNNEL_URL = 'https://feel-delight-elect-potential.trycloudflare.com';
+  const PUBLIC_GITHUB_PAGES_URL = 'https://ducthanh582.github.io/rang-den-moi-do';
 
   function getDefaultMobileQrUrl() {
-    const loc = window.location;
-    if (
-      loc.protocol === 'file:' ||
-      loc.hostname === 'localhost' ||
-      loc.hostname === '127.0.0.1' ||
-      loc.hostname.startsWith('192.168.')
-    ) {
-      return `${PUBLIC_TUNNEL_URL}/?view=mobile`;
-    }
-    const base = loc.origin + loc.pathname;
-    return `${base}?view=mobile`;
+    return `${PUBLIC_GITHUB_PAGES_URL}/?view=mobile`;
   }
 
   let currentQrUrl = getDefaultMobileQrUrl();
