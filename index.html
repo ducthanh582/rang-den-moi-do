@@ -3,551 +3,700 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Răng Đen Môi Đỏ — Tạp Chí Nghệ Thuật Tục Nhuộm Răng Đen Việt Nam</title>
-  <meta name="description" content="Ấn phẩm tạp chí số nghệ thuật giới thiệu tục nhuộm răng đen (Răng Đen Môi Đỏ) của người Việt — trải nghiệm song song giao diện Web & Điện thoại qua mã QR." />
+  <title>RĂNG ĐEN MÔI ĐỎ — Ấn Bản Báo Chí Di Sản &amp; Mỹ Học Việt</title>
+  <meta name="description" content="Ấn phẩm báo chí song ngữ Việt - Anh về nguồn gốc tục nhuộm răng đen của người Việt xưa, vũ khí chống đồng hóa phương Bắc, khảo cổ học và cảm hứng Răng Đen Môi Đỏ." />
 
-  <!-- Google Fonts: Editorial Serif, Script Calligraphy, Sans & Mono -->
+  <!-- Google Fonts: Broadsheet Serif, Script, Sans & Monospace -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=Pinyon+Script&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-  <!-- QRCode Generator Library -->
+  <!-- QRCode Generator -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body data-view-mode="web">
+<body data-lang="vi" data-view-mode="web">
 
-  <!-- Teal Diamond Ceramic Tile & Vintage Grain Background -->
+  <!-- Background Teal Diamond Tiles & Vintage Paper Grain -->
   <div class="tile-backdrop" aria-hidden="true"></div>
   <div class="grain-overlay" aria-hidden="true"></div>
 
   <!-- ====================================================================
-       STICKY EDITORIAL TOPBAR: SWITCH BETWEEN WEB UI / MOBILE UI / QR HUB
+       OPENING CAPTCHA & LANGUAGE SELECTION GATE (VI / EN)
        ==================================================================== -->
-  <header class="editorial-topbar">
-    <a href="#top" class="brand-mark">
-      <span class="brand-issue">ZINE NO. 01</span>
-      <span class="brand-title">Răng Đen Môi Đỏ</span>
-    </a>
+  <div class="captcha-gate-overlay" id="captcha-gate" role="dialog" aria-modal="true" aria-labelledby="captcha-heading">
+    <div class="captcha-ticket">
+      <span class="captcha-ornament">❧ HERITAGE PRESS VERIFICATION // XÁC THỰC ĐỘC GIẢ ☙</span>
+      <h1 class="captcha-title" id="captcha-heading">RĂNG ĐEN MÔI ĐỎ</h1>
+      <p class="captcha-subtitle">
+        Xác nhận truy cập và chọn ngôn ngữ để mở ấn phẩm báo chí chuyên đề về <strong>Tục Nhuộm Răng Đen</strong> của người Việt xưa.<br />
+        <em style="font-size: 0.82rem; opacity: 0.85;">Verify reader access and choose your language to enter the Heritage Broadsheet.</em>
+      </p>
 
-    <div class="mode-switcher" role="tablist" aria-label="Chuyển đổi giao diện">
-      <button type="button" class="mode-btn active" id="btn-mode-web" data-mode="web" role="tab" aria-selected="true">
-        <span>🖥️</span> Giao diện Web (Tạp chí)
-      </button>
-      <button type="button" class="mode-btn" id="btn-mode-mobile" data-mode="mobile" role="tab" aria-selected="false">
-        <span>📱</span> Giao diện Điện thoại &amp; QR
-      </button>
+      <!-- Captcha Checkbox -->
+      <div class="captcha-verify-box checked" id="captcha-checkbox-row" role="checkbox" aria-checked="true" tabindex="0">
+        <div class="captcha-check-left">
+          <div class="captcha-checkbox" id="captcha-box-mark">✓</div>
+          <div>
+            <span class="captcha-check-label">Tôi không phải người máy / I am a human reader</span>
+            <span class="captcha-check-sub">SECURITY PASS • EDITION NO. 01 // EST. VĂN LANG</span>
+          </div>
+        </div>
+        <span class="captcha-seal">CAPTCHA PASS</span>
+      </div>
+
+      <p class="captcha-lang-prompt">◆ CHỌN NGÔN NGỮ ĐỂ MỞ BÁO / SELECT LANGUAGE ◆</p>
+
+      <div class="captcha-lang-grid">
+        <button type="button" class="captcha-lang-btn" id="btn-enter-vi">
+          <strong>🇻🇳 TIẾNG VIỆT</strong>
+          <span>Ấn bản Quốc ngữ</span>
+        </button>
+        <button type="button" class="captcha-lang-btn" id="btn-enter-en">
+          <strong>🇬🇧 ENGLISH</strong>
+          <span>International Edition</span>
+        </button>
+      </div>
+
+      <p class="captcha-error-msg" id="captcha-error">
+        ⚠ Vui lòng tích chọn ô xác nhận độc giả trước khi vào trang / Please check the verification box above.
+      </p>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       STICKY UTILITY TOPBAR (VIEW SWITCHER + LANGUAGE SWITCHER + QR)
+       ==================================================================== -->
+  <header class="utility-topbar">
+    <div class="utility-brand">
+      <span>✦ THE HẠT HUYỀN CHRONICLE</span>
+      <span>//</span>
+      <span data-i18n="vi">ẤN BẢN BÁO CHÍ DI SẢN</span>
+      <span data-i18n="en">HERITAGE BROADSHEET EDITION</span>
     </div>
 
-    <div class="top-actions">
-      <button type="button" class="qr-trigger-btn" id="btn-open-qr-modal">
-        <span>▣</span> Quét Mã QR Triển Lãm
+    <div class="utility-controls">
+      <!-- Web vs Mobile Layout Toggle -->
+      <div class="view-pill-group" role="tablist">
+        <button type="button" class="util-btn active" id="btn-view-web" data-view="web">
+          <span data-i18n="vi">🖥️ Giao diện Web (Tờ Báo)</span>
+          <span data-i18n="en">🖥️ Web Broadsheet</span>
+        </button>
+        <button type="button" class="util-btn" id="btn-view-mobile" data-view="mobile">
+          <span data-i18n="vi">📱 Giao diện Điện thoại &amp; QR</span>
+          <span data-i18n="en">📱 Mobile Sheet &amp; QR</span>
+        </button>
+      </div>
+
+      <!-- Language Toggle (VI / EN) -->
+      <div class="lang-pill-group" role="group" aria-label="Language Switcher">
+        <button type="button" class="util-btn active" id="btn-lang-vi" data-lang-choice="vi">VI</button>
+        <button type="button" class="util-btn" id="btn-lang-en" data-lang-choice="en">EN</button>
+      </div>
+
+      <button type="button" class="qr-top-btn" id="btn-open-qr-modal">
+        <span data-i18n="vi">▣ Mã QR Triển Lãm</span>
+        <span data-i18n="en">▣ Exhibition QR</span>
       </button>
     </div>
   </header>
 
   <!-- ====================================================================
-       1. GIAO DIỆN WEB (DESKTOP EDITORIAL ART MAGAZINE SPREADS)
+       1. GIAO DIỆN WEB — TỜ BÁO DI SẢN (BROADSHEET NEWSPAPER LAYOUT)
        ==================================================================== -->
-  <main class="web-magazine-view" id="top">
+  <main class="newspaper-outer-wrap" id="top">
+    <article class="newspaper-sheet">
 
-    <!-- Magazine Masthead -->
-    <section class="zine-masthead">
-      <div class="masthead-meta">
-        <span>ẤN PHẨM VĂN HÓA &amp; THẨM MỸ DÂN GIAN VIỆT NAM</span>
-        <span class="highlight">✦ CHUYÊN ĐỀ: HẠT HUYỀN ÓNG ÁNH ✦</span>
-        <span>ARTWORK CONCEPT: @NENENETH // ISSUE 2026</span>
+      <!-- Top Motto & Ornamental Scroll (Inspired by Reference 1) -->
+      <div class="paper-motto-bar">
+        <span class="left-motto" data-i18n="vi">ĐÁNH CHO ĐỂ DÀI TÓC • ĐÁNH CHO ĐỂ ĐEN RĂNG</span>
+        <span class="left-motto" data-i18n="en">FIGHT TO KEEP OUR HAIR LONG • FIGHT TO KEEP OUR TEETH BLACK</span>
+        <span class="paper-ornament-scroll">❦ ❖ ❧</span>
+        <span class="right-motto" data-i18n="vi">BẢN SẮC VĂN HÓA DÂN TỘC VIỆT NAM</span>
+        <span class="right-motto" data-i18n="en">CULTURAL ARCHIVE OF ANCIENT VIETNAM</span>
       </div>
 
-      <div class="masthead-title-row">
-        <blockquote class="masthead-poem-snippet left">
-          “Năm quan mua lấy miệng cười<br />
-          Mười quan chẳng tiếc, tiếc người răng đen”
-        </blockquote>
-
-        <div class="masthead-logo-lockup">
-          <span class="masthead-script">Răng đen Môi đỏ</span>
-          <span class="masthead-sub">Mỹ Học Hạt Huyền Cổ Truyền</span>
-        </div>
-
-        <blockquote class="masthead-poem-snippet right">
-          “Nhớ hàng tre thẳng đọt măng<br />
-          Nhớ cô con gái hàm răng đen huyền”
-        </blockquote>
-      </div>
-    </section>
-
-    <!-- SPREAD 01: HERO EDITORIAL COVER -->
-    <section class="hero-spread" aria-label="Trang bìa tạp chí">
-      <div class="hero-visual-frame">
-        <img src="assets/art-hero.jpg" alt="Tranh nghệ thuật Răng Đen Môi Đỏ — vẻ đẹp truyền thống giao thoa đương đại" />
-        <div class="hero-floating-tag">
-          <span class="pulse-dot"></span>
-          <span>COVER STORY // NEO-TRADITIONAL ART</span>
-        </div>
-        <div class="hero-caption-bar">
-          <div class="hero-caption-text">
-            “Răng đen ai nhuộm cho mình / Cho duyên mình đượm, cho tình anh say...”
-          </div>
-          <span class="spread-number">TRANG 01 — 04</span>
-        </div>
+      <!-- Dotted Matrix Masthead Title -->
+      <div class="paper-masthead-band">
+        <div class="dot-matrix-block" aria-hidden="true"></div>
+        <h1 class="paper-masthead-title">RĂNG ĐEN MÔI ĐỎ</h1>
+        <div class="dot-matrix-block" aria-hidden="true"></div>
       </div>
 
-      <div class="hero-editorial-column">
-        <article class="editorial-lead-card">
-          <span class="section-kicker">Cội Nguồn Mỹ Học Việt</span>
-          <h1 class="editorial-headline">
-            Nụ Cười <em>Hạt Huyền</em> &amp; Bản Sắc Văn Lang
-          </h1>
-          <p class="dropcap-paragraph">
-            Từ thời dựng nước Văn Lang – Âu Lạc cho đến đầu thế kỷ XX, hàm răng đen nhánh như hạt na, hạt huyền kết hợp cùng sắc môi đỏ ăn trầu không chỉ là chuẩn mực sắc đẹp tối thượng, mà còn là tuyên ngôn văn hóa kiêu hãnh của người Việt cổ.
+      <!-- Dateline Strip -->
+      <div class="paper-dateline-bar">
+        <span data-i18n="vi">KHỞI NGUỒN: THỜI VĂN LANG – ÂU LẠC</span>
+        <span data-i18n="en">EST. VĂN LANG – ÂU LẠC ERA (500 BC)</span>
+        <span class="dateline-center" data-i18n="vi">HỒ SƠ KHẢO CỔ &amp; DÂN TỘC HỌC</span>
+        <span class="dateline-center" data-i18n="en">ARCHAEOLOGY &amp; ETHNOGRAPHY GAZETTE</span>
+        <span data-i18n="vi">ẤN BẢN ĐẶC BIỆT // SỐ 01</span>
+        <span data-i18n="en">SPECIAL ISSUE // VOL. I</span>
+      </div>
+
+      <!-- ================================================================
+           LEAD BANNER STORY: ORIGINS & WEAPON AGAINST NORTHERN ASSIMILATION
+           ================================================================ -->
+      <header>
+        <div class="lead-kicker" data-i18n="vi">CHUYÊN ĐỀ LỊCH SỬ // CỘI NGUỒN BÁCH VIỆT &amp; CUỘC CHIẾN BẢO TỒN CĂN TÍNH</div>
+        <div class="lead-kicker" data-i18n="en">HISTORICAL FEATURE // ANCIENT ORIGINS &amp; THE STRUGGLE FOR CULTURAL SOVEREIGNTY</div>
+
+        <h2 class="lead-banner-headline" data-i18n="vi">
+          TỤC NHUỘM RĂNG ĐEN: TỪ CỘI NGUỒN VĂN LANG ĐẾN <em>“Vũ Khí”</em> CHỐNG ĐỒNG HÓA PHƯƠNG BẮC
+        </h2>
+        <h2 class="lead-banner-headline" data-i18n="en">
+          BLACKENED TEETH: FROM VĂN LANG ROOTS TO A <em>“Cultural Weapon”</em> AGAINST NORTHERN ASSIMILATION
+        </h2>
+
+        <p class="lead-deck" data-i18n="vi">
+          Hơn hai thiên niên kỷ trước khi trở thành chuẩn mực thẩm mỹ trong ca dao, hàm răng đen hạt huyền đã là dấu ấn nhận diện nòi giống của cư dân Lạc Việt — một “hàng rào văn hóa” bất khuất giúp người Việt đứng vững trước hàng ngàn năm cưỡng bức đồng hóa từ các triều đại phong kiến phương Bắc.
+        </p>
+        <p class="lead-deck" data-i18n="en">
+          More than two millennia before becoming a poetic ideal of beauty, glossy obsidian-dyed teeth served as the unmistakable identity mark of the Lạc Việt people — an unyielding cultural bulwark that resisted a thousand years of forced assimilation by Northern imperial dynasties.
+        </p>
+      </header>
+
+      <!-- 3 Real Historical Archival Photographs -->
+      <div class="hero-photo-triptych">
+        <figure class="news-photo-frame">
+          <img src="assets/real-young-woman.jpg" alt="Thiếu nữ Bắc Kỳ xưa với hàm răng nhuộm đen và kiềng bạc (Tư liệu AAVH)" />
+          <figcaption class="photo-credit-caption" data-i18n="vi">
+            <strong>[TƯ LIỆU 01 — © AAVH j.c.]</strong> Chân dung thiếu nữ Bắc Kỳ đầu thế kỷ XX vấn khăn nhung, đeo kiềng bạc với hàm răng nhuộm đen hạt huyền.
+          </figcaption>
+          <figcaption class="photo-credit-caption" data-i18n="en">
+            <strong>[ARCHIVE 01 — © AAVH j.c.]</strong> Early 20th-century Northern Vietnamese young woman wearing a velvet turban and silver neck ring, smiling with glossy black teeth.
+          </figcaption>
+        </figure>
+
+        <figure class="news-photo-frame">
+          <img src="assets/real-man-elder.jpg" alt="Cụ ông người Việt đội khăn đóng áo the với hàm răng nhuộm đen (Tư liệu AAVH)" />
+          <figcaption class="photo-credit-caption" data-i18n="vi">
+            <strong>[TƯ LIỆU 02 — © AAVH j.c.]</strong> Cụ ông người Việt trong trang phục khăn đóng áo the truyền thống lộ hàm răng đen nhánh — minh chứng cả nam giới cũng nhuộm răng.
+          </figcaption>
+          <figcaption class="photo-credit-caption" data-i18n="en">
+            <strong>[ARCHIVE 02 — © AAVH j.c.]</strong> Elderly Vietnamese gentleman in traditional turban and tunic showing blackened teeth — proof that men equally practiced the custom.
+          </figcaption>
+        </figure>
+
+        <figure class="news-photo-frame">
+          <img src="assets/real-woman-smile.jpg" alt="Nụ cười răng đen của cụ bà Việt Nam" />
+          <figcaption class="photo-credit-caption" data-i18n="vi">
+            <strong>[TƯ LIỆU 03 — NHIẾP ẢNH ĐỜI THƯỜNG]</strong> Nụ cười rạng rỡ với hàm răng đen nguyên vẹn, chắc khỏe của một cụ bà vùng đồng bằng Bắc Bộ.
+          </figcaption>
+          <figcaption class="photo-credit-caption" data-i18n="en">
+            <strong>[ARCHIVE 03 — DOCUMENTARY PHOTO]</strong> Radiant smile of an elderly woman in the Red River Delta preserving healthy, jet-black teeth into advanced age.
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- 3-Column Newspaper Body: (1) Nguồn gốc, (2) Vũ khí chống đồng hóa, (3) Những ai phải nhuộm răng? -->
+      <div class="newspaper-columns-3">
+
+        <!-- Column 1: Nguồn gốc của người Việt xưa -->
+        <div class="news-col">
+          <span class="byline-tag" data-i18n="vi">I. Nguồn Gốc Từ Thời Dựng Nước Văn Lang</span>
+          <span class="byline-tag" data-i18n="en">I. Origins in the Văn Lang – Âu Lạc Era</span>
+
+          <p class="dropcap" data-i18n="vi">
+            Tục nhuộm răng đen của người Việt không phải là một trào lưu làm đẹp muộn màng, mà bắt nguồn sâu xa từ thời kỳ dựng nước Văn Lang – Âu Lạc (thuộc nền Văn hóa Đông Sơn, cách ngày nay khoảng 2.000 đến 2.500 năm). Trong các thư tịch cổ phương Bắc viết về vùng đất phương Nam như <em>Sơn Hải Kinh</em>, <em>Dị Vật Chí</em> hay <em>Giao Châu Ký</em>, các sử gia cổ đại đều ghi nhận cư dân Lạc Việt ở Giao Chỉ có tập tục đặc trưng là “khắc mình vẽ rồng, ăn trầu và nhuộm răng đen” (hắc xỉ).
           </p>
-          <p style="font-size: 0.9rem; color: var(--silver-mid); margin-bottom: 1.25rem;">
-            Không đơn thuần là trang điểm, lớp nhựa cánh kiến và gáo dừa bao bọc men răng như một lớp sơn mài tự nhiên — giúp chắc răng, thơm miệng và khẳng định sự trưởng thành, nền nếp.
+          <p class="dropcap" data-i18n="en">
+            Tooth blackening among the Vietnamese is not a late cosmetic fashion, but an ancient custom rooted in the foundational Văn Lang – Âu Lạc era (the Đông Sơn culture, dating back 2,000 to 2,500 years). Ancient chronicles describing the southern lands — including the <em>Classic of Mountains and Seas</em>, <em>Records of Strange Things</em>, and <em>Records of Giao Châu</em> — consistently documented that the Lạc Việt inhabitants practiced tattooing, betel chewing, and “blackening their teeth” (hắc xỉ).
           </p>
 
-          <div class="key-pillars-mini">
-            <div class="pillar-stat">
-              <strong>&gt; 2.000 năm</strong>
-              <span>Lịch sử lưu truyền từ thời Đông Sơn</span>
-            </div>
-            <div class="pillar-stat">
-              <strong>4 Công đoạn</strong>
-              <span>Nhuộm đỏ cánh kiến đến đen huyền</span>
-            </div>
-            <div class="pillar-stat">
-              <strong>Sơn mài sống</strong>
-              <span>Bảo vệ men răng bền bỉ suốt đời</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Quick QR Entry Dock on Hero -->
-        <div class="qr-mini-dock">
-          <div class="qr-mini-canvas-wrap" id="qr-hero-box" title="Quét mã để mở trên điện thoại"></div>
-          <div class="qr-mini-info">
-            <h4>Trải Nghiệm Qua Mã QR</h4>
-            <p>Quét mã bằng camera điện thoại để đọc ấn phẩm ở chế độ Tạp chí Di động (Mobile Zine).</p>
-            <div class="qr-mini-actions">
-              <button type="button" class="mini-link-btn" id="btn-hero-switch-mobile">Xem bản Mobile ngay →</button>
-              <button type="button" class="mini-link-btn" id="btn-hero-open-qr">Phóng to / Tải QR</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SPREAD 02: Ý NGHĨA VĂN HÓA & TƯ LIỆU (3-COLUMN EDITORIAL BENTO) -->
-    <section class="magazine-spread" id="spread-meaning">
-      <div class="spread-header">
-        <div>
-          <span class="section-kicker">Chuyên Mục 01 // Triết Lý Thẩm Mỹ</span>
-          <h2 class="editorial-headline" style="margin-bottom:0;">Vì Sao Người Việt Xưa Chuộng <em>Răng Đen</em>?</h2>
-        </div>
-        <span class="spread-number">SPREAD 02 // CULTURAL IDENTITY</span>
-      </div>
-
-      <div class="meaning-grid">
-        <!-- Left: Vertical Art Strip from User's Handfan Artwork -->
-        <div class="strip-showcase-card">
-          <img src="assets/art-strip.png" alt="Dải gạch xanh cổ điển và chiếc răng nhuộm đen hạt huyền" />
-          <div class="strip-overlay-badge">
-            <span class="meaning-tag">BIỂU TƯỢNG THỊ GIÁC</span>
-            <p style="font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; color: var(--silver-light); margin-top: 0.25rem;">
-              Từ men ngà tự nhiên hóa sắc đen huyền bí
-            </p>
-          </div>
+          <p data-i18n="vi">
+            Xuất phát từ môi trường sống vùng nhiệt đới sông nước và văn minh lúa nước, người Việt cổ sớm tìm ra các loại thảo mộc, nhựa cây và khoáng chất tự nhiên để bao bọc men răng. Trải qua hàng thiên niên kỷ, tập tục này kết tinh thành bản sắc văn hóa tự nhận diện của cộng đồng người Việt từ đồng bằng sông Hồng đến vùng Bắc Trung Bộ.
+          </p>
+          <p data-i18n="en">
+            Living in a tropical riverine environment shaped by wet-rice civilization, ancient Vietnamese communities discovered indigenous resins, herbs, and minerals to coat their tooth enamel. Over millennia, this practice crystallized into a defining cultural marker across the Red River Delta and northern central plains.
+          </p>
         </div>
 
-        <!-- Middle: 3 Concise Editorial Pillars -->
-        <div class="meaning-cards-stack">
-          <article class="meaning-item-card">
-            <div class="meaning-item-header">
-              <span class="meaning-tag">01 // THẨM MỸ TƯƠNG PHẢN</span>
-              <span>✦</span>
-            </div>
-            <h3>Tôn Vinh “Răng Đen – Môi Đỏ – Da Trắng”</h3>
-            <p>
-              Trong nghệ thuật thị giác truyền thống, sắc đen nhánh ánh gương của hàm răng tạo độ tương phản tuyệt mỹ với đôi môi đỏ thắm vị trầu cau và làn da trắng ngần dưới vành khăn mỏ quạ.
-            </p>
-          </article>
+        <!-- Column 2: Vũ khí chống đồng hóa với người phương Bắc -->
+        <div class="news-col">
+          <span class="byline-tag" data-i18n="vi">II. “Vũ Khí” Chống Đồng Hóa Phương Bắc</span>
+          <span class="byline-tag" data-i18n="en">II. A “Weapon” Against Northern Assimilation</span>
 
-          <article class="meaning-item-card">
-            <div class="meaning-item-header">
-              <span class="meaning-tag">02 // BẢN SẮC &amp; TRƯỞNG THÀNH</span>
-              <span>✦</span>
-            </div>
-            <h3>Dấu Ấn Văn Minh &amp; Nền Nếp Gia Phong</h3>
-            <p>
-              Người xưa quan niệm hàm răng trắng để mộc là chưa trải sự đời. Thiếu nữ đến tuổi cập kê (13–16 tuổi) bắt đầu nhuộm răng như một nghi thức trưởng thành, thể hiện sự dịu dàng, kín đáo và đảm đang.
-            </p>
-          </article>
+          <p data-i18n="vi">
+            Trong suốt hơn 1.000 năm Bắc thuộc và các cuộc kháng chiến chống quân xâm lược Hán, Đường, Tống, Minh, Thanh, các triều đại phong kiến phương Bắc luôn tìm cách xóa bỏ văn hóa bản địa của người Việt. Khốc liệt nhất là vào đầu thế kỷ XV (1407–1427), khi nhà Minh đô hộ Đại Ngu, chính quyền đô hộ đã ban hành lệnh cưỡng bức người Việt phải <strong>“óc phát bạch xỉ”</strong> — bắt đàn ông cạo tóc, bắt phụ nữ mặc áo ngắn quần dài kiểu Bắc và cấm tuyệt đối việc ăn trầu, nhuộm răng đen.
+          </p>
+          <p data-i18n="en">
+            Throughout a millennium of Northern domination and subsequent invasions by the Han, Tang, Song, Ming, and Qing empires, northern courts relentlessly attempted to erase indigenous Vietnamese identity. Most ruthlessly during the Ming occupation (1407–1427), imperial authorities enforced decrees of <strong>“cropped hair and white teeth”</strong> — forbidding betel chewing and tooth blackening while forcing Northern dress codes.
+          </p>
 
-          <article class="meaning-item-card">
-            <div class="meaning-item-header">
-              <span class="meaning-tag">03 // Y HỌC DÂN GIAN</span>
-              <span>✦</span>
-            </div>
-            <h3>Lớp “Giáp Sơn Mài” Bảo Vệ Răng Nướu</h3>
-            <p>
-              Hỗn hợp cánh kiến đỏ, nhựa gáo dừa, phèn đen và tannin từ vỏ lựu kết tủa thành màng bảo vệ kháng khuẩn tự nhiên, ngăn ngừa sâu răng, giữ chân răng chắc khỏe đến tuổi xế chiều.
-            </p>
-          </article>
-        </div>
-
-        <!-- Right: Folk Poetry & Historical Photo Archive -->
-        <div class="poetry-archive-card">
-          <blockquote class="ca-dao-quote">
-            “Lấy chồng cho đáng tấm chồng,<br />
-            Bõ công trang điểm má hồng răng đen.”
-            <span>— Ca Dao Cổ Truyền Việt Nam</span>
-          </blockquote>
-
-          <div class="archive-photo-box">
-            <img src="assets/archive-woman.jpg" alt="Tư liệu lịch sử: Nụ cười răng đen của phụ nữ Việt Nam" />
-            <div class="archive-photo-caption">
-              [TƯ LIỆU] Nụ cười hạt huyền mộc mạc của phụ nữ Việt truyền thống (Wikimedia Archive).
-            </div>
+          <div class="historical-decree-box">
+            <span data-i18n="vi">
+              “Đánh cho để dài tóc,<br />
+              Đánh cho để đen răng,<br />
+              Đánh cho nó chích luân bất phản...”
+            </span>
+            <span data-i18n="en">
+              “Fight to keep our hair long,<br />
+              Fight to keep our teeth black,<br />
+              Fight until not a single chariot wheel returns...”
+            </span>
+            <cite data-i18n="vi">— Hoàng Đế Quang Trung (Hịch Xuất Quân Năm Kỷ Dậu 1789)</cite>
+            <cite data-i18n="en">— Emperor Quang Trung (Imperial Battle Edict, 1789)</cite>
           </div>
 
-          <div class="archive-photo-box">
-            <img src="assets/heritage-art.jpg" alt="Chân dung nghệ thuật phụ nữ Bắc Bộ khăn mỏ quạ răng đen môi đỏ" style="height: 175px; filter: none;" />
-            <div class="archive-photo-caption">
-              [MINH HỌA] Vẻ đẹp Áo ngũ thân, khăn mỏ quạ &amp; nụ cười răng đen.
-            </div>
-          </div>
+          <p data-i18n="vi">
+            Bất chấp mọi lệnh cấm, người Việt vẫn truyền tai nhau giữ hàm răng đen như một mật mã căn tính thiêng liêng để phân biệt mình với người phương Bắc. Hàm răng đen vì thế vượt lên trên ý nghĩa thẩm mỹ, trở thành <strong>“vũ khí văn hóa chống đồng hóa”</strong> bảo vệ linh hồn dân tộc.
+          </p>
+          <p data-i18n="en">
+            Defying imperial bans, Vietnamese people steadfastly preserved their blackened teeth as a sacred badge of sovereignty distinguishing them from Northern rulers. Blackened teeth thus transcended aesthetics to become a powerful <strong>cultural weapon against assimilation</strong>.
+          </p>
         </div>
-      </div>
-    </section>
 
-    <!-- SPREAD 03: NGUYÊN LIỆU BÍ TRUYỀN & QUY TRÌNH 4 BƯỚC -->
-    <section class="magazine-spread" id="spread-craft">
-      <div class="spread-header">
-        <div>
-          <span class="section-kicker">Chuyên Mục 02 // Nghệ Thuật Chế Tác</span>
-          <h2 class="editorial-headline" style="margin-bottom:0;">Bí Thuật Nhuộm <em>Hạt Huyền</em> 4 Giai Đoạn</h2>
+        <!-- Column 3: Những ai phải nhuộm răng đen? -->
+        <div class="news-col">
+          <h3 class="sub-article-headline" data-i18n="vi">III. NHỮNG AI PHẢI NHUỘM RĂNG ĐEN TRONG XÃ HỘI VIỆT XƯA?</h3>
+          <h3 class="sub-article-headline" data-i18n="en">III. WHO PRACTICED TOOTH BLACKENING IN OLD VIETNAM?</h3>
+
+          <p data-i18n="vi">
+            Một lầm tưởng phổ biến ngày nay là chỉ có phụ nữ mới nhuộm răng đen. Thực tế lịch sử chứng minh: <strong>tất cả người Việt xưa — không phân biệt nam hay nữ, giàu hay nghèo, nông dân hay quan lại, sĩ phu và cả vua chúa trong triều đình — đều nhuộm răng đen.</strong>
+          </p>
+          <p data-i18n="en">
+            A common modern misconception is that only women blackened their teeth. Historical records prove otherwise: <strong>virtually all Vietnamese in pre-modern society — men and women alike, peasants, Confucian scholars, mandarins, and royal court members — dyed their teeth black.</strong>
+          </p>
+
+          <p data-i18n="vi">
+            Nhuộm răng được xem là <strong>nghi thức trưởng thành bắt buộc</strong>. Khi thiếu niên nam nữ bước vào độ tuổi 13 đến 16 (tuổi cập kê), gia đình sẽ làm lễ hoặc chọn ngày lành để bắt đầu nhuộm răng. Trong xã hội truyền thống, người trưởng thành mà để răng trắng bị coi là khác thường, chưa chín chắn hoặc bị giễu cợt trong dân gian là <em>“răng trắng như răng Ngô, răng Hán”</em> hay <em>“răng trắng nhởn”</em>.
+          </p>
+          <p data-i18n="en">
+            Tooth blackening functioned as a <strong>mandatory rite of passage into adulthood</strong>. Between ages 13 and 16, both boys and girls underwent the dyeing ritual. In traditional village society, an adult with un-dyed white teeth was viewed as immature, uncouth, or foreign — often mocked in folk idioms as having <em>“foreign white teeth.”</em>
+          </p>
+
+          <p data-i18n="vi">
+            Đối với người con gái, hàm răng đen nhánh như hạt huyền là thước đo của sự nết na, đảm đang và duyên dáng. Đối với người đàn ông, hàm răng đen thể hiện sự chững chạc, lịch lãm của bậc trượng phu giữ trọn lễ nghĩa tổ tiên. Tập tục toàn dân này kéo dài bền bỉ cho tới tận những năm 1930–1940.
+          </p>
+          <p data-i18n="en">
+            For young women, obsidian-glossy teeth signified grace, virtue, and readiness for marriage; for men, they embodied dignity and fidelity to ancestral custom. This nationwide practice endured well into the 1930s and 1940s.
+          </p>
         </div>
-        <span class="spread-number">SPREAD 03 // ALCHEMY &amp; RITUAL</span>
+
       </div>
 
-      <div class="craft-grid">
-        <!-- Left: Ingredients Flat-lay Showcase -->
-        <div class="ingredients-showcase">
-          <div class="ingredients-art-banner">
-            <img src="assets/ingredients-art.jpg" alt="Nguyên liệu nhuộm răng đen: Cánh kiến đỏ, nhựa gáo dừa, phèn đen, trầu cau" />
-          </div>
-          <div class="ingredients-list">
-            <div class="ingredient-pill">
-              <strong>Cánh Kiến Đỏ</strong>
-              <span>Nhựa tiết từ sâu cánh kiến ngâm cốt chanh, rượu gạo tạo nền đỏ thẫm.</span>
-            </div>
-            <div class="ingredient-pill">
-              <strong>Nhựa Gáo Dừa</strong>
-              <span>Đốt vỏ gáo dừa khô hứng trên lưỡi dao sắt để lấy chất nhựa đen sánh.</span>
-            </div>
-            <div class="ingredient-pill">
-              <strong>Phèn Đen &amp; Ngũ Bội</strong>
-              <span>Muối sắt tự nhiên phản ứng với tannin giúp khóa màu đen bóng như gương.</span>
-            </div>
-            <div class="ingredient-pill">
-              <strong>Lá Trầu &amp; Vỏ Cau</strong>
-              <span>Dùng đánh sạch răng, làm se nướu và giữ miếng thuốc nhuộm suốt đêm.</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: 4-Stage Concise Timeline -->
-        <div class="process-stages-panel">
-          <div class="stage-row">
-            <div class="stage-num">I</div>
-            <div class="stage-body">
-              <h4>Cà Răng &amp; Khử Men (Chuẩn Bị)</h4>
-              <p>Chà sạch bề mặt răng bằng vỏ cau khô với muối trắng, ngậm nước cốt chanh hoặc giấm thanh để làm mở nhẹ bề mặt men răng, giúp thuốc bám sâu.</p>
-            </div>
-            <span class="stage-duration">1 – 2 Ngày đầu</span>
-          </div>
-
-          <div class="stage-row">
-            <div class="stage-num">II</div>
-            <div class="stage-body">
-              <h4>Nhuộm Đỏ (Vào Cánh Kiến)</h4>
-              <p>Phết hỗn hợp bột cánh kiến, vỏ lựu đun cô đặc lên lá trầu hoặc bẹ cau, áp sát vào hai hàm răng mỗi tối cho đến khi răng chuyển sang màu đỏ tía trầm.</p>
-            </div>
-            <span class="stage-duration">3 – 4 Đêm</span>
-          </div>
-
-          <div class="stage-row">
-            <div class="stage-num">III</div>
-            <div class="stage-body">
-              <h4>Vào Đen (Phản Ứng Phèn Đen)</h4>
-              <p>Bôi thuốc đen gồm phèn đen hòa cùng bột ngũ bội tử. Phản ứng hóa học tự nhiên biến lớp nền đỏ thẫm hóa sang màu đen nhánh chỉ sau vài đêm.</p>
-            </div>
-            <span class="stage-duration">2 – 3 Đêm</span>
-          </div>
-
-          <div class="stage-row">
-            <div class="stage-num">IV</div>
-            <div class="stage-body">
-              <h4>Giữ Bóng (Lên Nước Hạt Huyền)</h4>
-              <p>Đốt gáo dừa lấy nhựa đen (“nhựa hạt huyền”) quết lên răng để khóa màu. Trong suốt thời gian nhuộm, người nhuộm chỉ nuốt cháo loãng, kiêng nhai đồ cứng và đồ nóng.</p>
-            </div>
-            <span class="stage-duration">Hoàn tất</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SPREAD 04: INTERACTIVE TOOTH SIMULATOR & ZINE PACKAGING ARCHIVE -->
-    <section class="magazine-spread" id="spread-interactive">
-      <div class="spread-header">
-        <div>
-          <span class="section-kicker">Chuyên Mục 03 // Trải Nghiệm Tương Tác</span>
-          <h2 class="editorial-headline" style="margin-bottom:0;">Mô Phỏng Sắc Men &amp; Ấn Phẩm <em>Handfan Art</em></h2>
-        </div>
-        <span class="spread-number">SPREAD 04 // INTERACTIVE &amp; ARTIFACT</span>
+      <!-- ================================================================
+           SECTION 02: ARCHAEOLOGICAL & SCIENTIFIC HEALTH EVIDENCE
+           (Inspired by the Helmut Newton Editorial Layout Reference)
+           ================================================================ -->
+      <div class="editorial-section-divider">
+        <span data-i18n="vi">CHUYÊN MỤC 02 // BẰNG CHỨNG KHẢO CỔ HỌC &amp; Y HỌC HIỆN ĐẠI</span>
+        <span data-i18n="en">SECTION 02 // ARCHAEOLOGICAL EXCAVATIONS &amp; SCIENTIFIC EVIDENCE</span>
+        <span>ARCHIVE REF. ĐÔNG SƠN — 500 BC</span>
       </div>
 
-      <div class="interactive-art-grid">
-        <!-- Left: Interactive Tooth Dyeing Simulator -->
-        <div class="tooth-simulator-card">
+      <h2 class="statement-headline" data-i18n="vi">
+        KHAI QUẬT KHẢO CỔ CHỨNG MINH LỚP <span class="script-accent">Sơn mài sinh học</span> BẢO VỆ RĂNG SUỐT NGÀN NĂM
+      </h2>
+      <h2 class="statement-headline" data-i18n="en">
+        ARCHAEOLOGICAL DIGS REVEAL A NATURAL <span class="script-accent">Bio-lacquer</span> THAT PROTECTED TEETH FOR MILLENNIA
+      </h2>
+
+      <div class="editorial-2col-spread">
+        <figure class="news-photo-frame">
+          <img src="assets/archive-woman.jpg" alt="Cụ bà Việt Nam với hàm răng đen chắc khỏe và đôi môi đỏ ăn trầu" style="height: 295px;" />
+          <figcaption class="photo-credit-caption" data-i18n="vi">
+            <strong>[TƯ LIỆU WIKIMEDIA COMMONS]</strong> Dù ở tuổi bát tuần, nhiều cụ ông cụ bà nhuộm răng đen vẫn giữ được nguyên hàm răng chắc khỏe, không hề bị sâu hay rụng sớm.
+          </figcaption>
+          <figcaption class="photo-credit-caption" data-i18n="en">
+            <strong>[WIKIMEDIA COMMONS ARCHIVE]</strong> Even in their eighties, Vietnamese elders with blackened teeth retained complete, cavity-free dental arches.
+          </figcaption>
+        </figure>
+
+        <div class="editorial-2col-text">
           <div>
-            <span class="meaning-tag">TƯƠNG TÁC TRỰC QUAN</span>
-            <h3 style="font-family: var(--font-serif); font-size: 1.65rem; margin-top: 0.2rem;">
-              Trải Nghiệm Lên Màu Hạt Huyền
-            </h3>
-            <p style="font-size: 0.86rem; color: var(--silver-mid);">
-              Kéo thanh trượt hoặc chọn từng giai đoạn để quan sát sự biến chuyển màu sắc của chiếc răng từ men ngà tự nhiên sang đen nhánh ánh gương.
+            <span class="byline-tag" data-i18n="vi">Chứng Cứ Từ Các Di Chỉ Đông Sơn</span>
+            <span class="byline-tag" data-i18n="en">Evidence from Đông Sơn Excavations</span>
+            <p data-i18n="vi">
+              Các cuộc khai quật khảo cổ học tại hàng loạt di chỉ mộ thuyền và mộ đất thuộc <strong>Văn hóa Đông Sơn</strong> (niên đại cách nay 2.000 – 2.500 năm) như di chỉ <strong>Châu Can</strong> (Hà Nội), <strong>Núi Nấp, Đông Tiến, Quỳ Chử</strong> (Thanh Hóa) và <strong>Làng Vạc</strong> (Nghệ An) đã mang lại bằng chứng vật chất xác thực: nhiều di cốt người Việt cổ vẫn còn lưu giữ hàm răng phủ lớp màu đen nhánh.
+            </p>
+            <p data-i18n="en">
+              Archaeological excavations at boat-coffin and earth burials of the <strong>Đông Sơn Culture</strong> (2,000–2,500 years BP) — including <strong>Châu Can</strong> (Hanoi), <strong>Núi Nấp, Đông Tiến, Quỳ Chử</strong> (Thanh Hóa), and <strong>Làng Vạc</strong> (Nghệ An) — uncovered ancient skeletal remains whose teeth still bore an intact, lustrous black coating.
+            </p>
+            <p data-i18n="vi" style="margin-top: 0.75rem;">
+              Đáng kinh ngạc hơn, kết quả giám định nhân trắc học trên các mẫu răng cổ này cho thấy tỷ lệ sâu răng và viêm nha chu cực kỳ thấp, men răng không bị mài mòn dù điều kiện sinh hoạt cổ đại chưa có kem đánh răng.
+            </p>
+            <p data-i18n="en" style="margin-top: 0.75rem;">
+              Remarkably, bio-anthropological analysis of these ancient teeth revealed an extraordinarily low rate of dental caries and alveolar bone loss, with enamel preserved in pristine condition.
             </p>
           </div>
 
-          <div class="simulator-stage-display">
-            <div class="tooth-visual-box">
-              <img src="assets/art-tooth-detail.png" id="sim-tooth-img" alt="Chiếc răng nhuộm đen" />
+          <div>
+            <span class="byline-tag" data-i18n="vi">Giải Mã Cơ Chế Khoa Học &amp; Sức Khỏe</span>
+            <span class="byline-tag" data-i18n="en">Modern Dental &amp; Chemical Science</span>
+            <p data-i18n="vi">
+              Dưới góc độ hóa sinh và nha khoa hiện đại, thuốc nhuộm răng cổ truyền là một hợp chất bảo vệ răng hoàn hảo:
+            </p>
+            <p data-i18n="en">
+              Modern biochemical and dental research confirms that traditional Vietnamese tooth dye acts as a potent clinical sealant:
+            </p>
+            <p data-i18n="vi" style="margin-top: 0.65rem;">
+              <strong>1. Phức hợp Tannin &amp; Sắt (Phèn đen + Ngũ bội tử):</strong> Tạo kết tủa <em>Ferric Tannate</em> không tan, bịt kín các ống ngà li ti và ngăn chặn axit ăn mòn men răng.<br />
+              <strong>2. Nhựa Cánh Kiến (Shellac tự nhiên):</strong> Tạo màng polymer sinh học kỵ nước bao bọc bề mặt răng.<br />
+              <strong>3. Nhựa Đốt Gáo Dừa:</strong> Giàu hợp chất <em>Phenolic</em> và <em>Creosote</em> tự nhiên có khả năng tiêu diệt vi khuẩn <em>Streptococcus mutans</em> (tác nhân chính gây sâu răng) và làm săn chắc mô nướu.
+            </p>
+            <p data-i18n="en" style="margin-top: 0.65rem;">
+              <strong>1. Ferric Tannate Complex (Black Alum + Gallnut):</strong> Seals microscopic dentinal tubules and blocks acid demineralization.<br />
+              <strong>2. Sticklac Resin (Natural Shellac):</strong> Forms a hydrophobic bio-polymer shield over enamel.<br />
+              <strong>3. Pyrolyzed Coconut Shell Tar:</strong> Rich in antibacterial <em>phenolic</em> compounds that inhibit <em>Streptococcus mutans</em> and strengthen gingival tissue.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           SECTION 03: QUY TRÌNH NHUỘM RĂNG ĐEN CƠ BẢN (4 STEPS + 1909 WOODBLOCK)
+           ================================================================ -->
+      <div class="editorial-section-divider">
+        <span data-i18n="vi">CHUYÊN MỤC 03 // QUY TRÌNH NHUỘM RĂNG ĐEN CƠ BẢN</span>
+        <span data-i18n="en">SECTION 03 // THE TRADITIONAL 4-STAGE DYEING PROCESS</span>
+        <span>HENRI OGER ARCHIVE // 1909</span>
+      </div>
+
+      <div class="process-newspaper-grid">
+        <figure class="news-photo-frame">
+          <img src="assets/real-oger-1909.jpg" alt="Bản khắc gỗ Nhuộm răng năm 1909 trong bộ sách của Henri Oger" style="height: 270px; object-fit: contain; background: #d8be42;" />
+          <figcaption class="photo-credit-caption" data-i18n="vi">
+            <strong>[TƯ LIỆU KHẮC GỖ 1909]</strong> Minh họa <em>“Nhuộm răng”</em> (chữ Nôm: 染𦝄) trong công trình <em>Technique du peuple Annamite</em> của học giả Henri Oger (Wikimedia Commons).
+          </figcaption>
+          <figcaption class="photo-credit-caption" data-i18n="en">
+            <strong>[1909 WOODBLOCK PRINT]</strong> Historical illustration <em>“Nhuộm răng”</em> from Henri Oger’s monumental 1909 study <em>Technique du peuple Annamite</em> (Wikimedia Commons).
+          </figcaption>
+        </figure>
+
+        <div class="steps-4-table">
+          <div class="step-cell">
+            <span class="step-cell-num" data-i18n="vi">GIAI ĐOẠN 01 // 1 – 2 NGÀY ĐẦU</span>
+            <span class="step-cell-num" data-i18n="en">STAGE 01 // DAYS 1 – 2</span>
+            <h4 data-i18n="vi">Cà Răng &amp; Khử Men</h4>
+            <h4 data-i18n="en">Enamel Cleansing &amp; Etching</h4>
+            <p data-i18n="vi">
+              Người nhuộm dùng vỏ cau khô chà kỹ với muối trắng để lấy sạch mảng bám, sau đó ngậm nước cốt chanh hoặc giấm thanh cho men răng hơi mềm và mở nhẹ bề mặt, giúp thuốc nhuộm bám sâu.
+            </p>
+            <p data-i18n="en">
+              Dried areca husks and salt are rubbed across the teeth to remove plaque, followed by holding lemon juice or rice vinegar in the mouth to mildly etch the enamel surface for deep dye absorption.
+            </p>
+          </div>
+
+          <div class="step-cell">
+            <span class="step-cell-num" data-i18n="vi">GIAI ĐOẠN 02 // 3 – 4 ĐÊM TIẾP THEO</span>
+            <span class="step-cell-num" data-i18n="en">STAGE 02 // NIGHTS 3 – 6</span>
+            <h4 data-i18n="vi">Nhuộm Đỏ (Vào Cánh Kiến)</h4>
+            <h4 data-i18n="en">Crimson Base (Sticklac Application)</h4>
+            <p data-i18n="vi">
+              Bột nhựa cánh kiến đỏ trộn cùng nước cốt chanh, rượu gạo và vỏ lựu đun cô đặc thành cao, phết lên lá trầu hoặc bẹ cau rồi áp chặt vào hai hàm răng mỗi đêm cho đến khi răng lên màu đỏ tía trầm.
+            </p>
+            <p data-i18n="en">
+              Sticklac resin simmered with pomegranate rind, lemon juice, and rice wine is spread onto strips of betel leaf or areca sheath and pressed onto the teeth overnight until they turn deep crimson-plum.
+            </p>
+          </div>
+
+          <div class="step-cell">
+            <span class="step-cell-num" data-i18n="vi">GIAI ĐOẠN 03 // 2 – 3 ĐÊM KẾ TIẾP</span>
+            <span class="step-cell-num" data-i18n="en">STAGE 03 // NIGHTS 7 – 9</span>
+            <h4 data-i18n="vi">Vào Đen (Phèn Đen &amp; Ngũ Bội)</h4>
+            <h4 data-i18n="en">Blackening (Iron Alum &amp; Gallnut)</h4>
+            <p data-i18n="vi">
+              Hỗn hợp phèn đen (muối sắt) hòa cùng bột ngũ bội tử giàu tannin được đắp lên răng. Phản ứng hóa học tự nhiên giữa sắt và nền cánh kiến đỏ chuyển màu răng sang sắc đen nhánh.
+            </p>
+            <p data-i18n="en">
+              A paste of black iron alum and tannin-rich gallnut powder is applied. The chemical reaction between iron ions and the crimson sticklac base transforms the teeth to a deep obsidian black.
+            </p>
+          </div>
+
+          <div class="step-cell">
+            <span class="step-cell-num" data-i18n="vi">GIAI ĐOẠN 04 // HOÀN TẤT</span>
+            <span class="step-cell-num" data-i18n="en">STAGE 04 // FINAL GLAZING</span>
+            <h4 data-i18n="vi">Giữ Bóng (Lên Nước Hạt Huyền)</h4>
+            <h4 data-i18n="en">Obsidian Glaze (Coconut Shell Tar)</h4>
+            <p data-i18n="vi">
+              Đốt vỏ gáo dừa khô trên lưỡi dao sắt để hứng chất nhựa đen sánh (nhựa hạt huyền) quết lên răng nhằm khóa màu bền vĩnh viễn. Trong suốt các ngày nhuộm, người nhuộm chỉ nuốt cháo nguội, kiêng nhai đồ cứng.
+            </p>
+            <p data-i18n="en">
+              Dried coconut shells are burned against cold iron to condense a glossy black tar, brushed onto the teeth to lock in a mirror-like sheen. Throughout the week, only cool porridge is swallowed without chewing.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           SECTION 04: LIVING ETHNIC GROUPS IN VIETNAM & SOUTHEAST ASIA
+           (Formatted like the horizontal index strips in Helmut Newton ref)
+           ================================================================ -->
+      <div class="editorial-section-divider">
+        <span data-i18n="vi">CHUYÊN MỤC 04 // BẢN ĐỒ TỘC NGƯỜI VIỆT NAM HIỆN NAY &amp; ĐÔNG NAM Á</span>
+        <span data-i18n="en">SECTION 04 // LIVING ETHNIC HERITAGE IN VIETNAM &amp; SOUTHEAST ASIA</span>
+        <span>ETHNOGRAPHIC SURVEY // 2026</span>
+      </div>
+
+      <div class="index-strip-list">
+        <!-- Strip 1: Ethnic groups in Vietnam today -->
+        <div class="index-strip-row">
+          <div class="index-strip-title" data-i18n="vi">
+            CÁC DÂN TỘC VIỆT NAM<br />CÒN DUY TRÌ HIỆN NAY
+          </div>
+          <div class="index-strip-title" data-i18n="en">
+            ETHNIC GROUPS IN VIETNAM<br />MAINTAINING THE CUSTOM
+          </div>
+
+          <div class="index-strip-body">
+            <div>
+              <p data-i18n="vi">
+                Hiện nay tại Việt Nam, bên cạnh thế hệ các cụ cao niên người <strong>Kinh, Mường, Tày, Nùng</strong> ở đồng bằng và trung du Bắc Bộ, tục nhuộm răng đen vẫn được lưu giữ ở khoảng <strong>6 đến 8 dân tộc thiểu số</strong> vùng núi Tây Bắc (đặc biệt tại Lai Châu, Điện Biên, Sơn La, Lào Cai) gồm: <strong>dân tộc Lự, Si La, Mảng, Kháng, Cống, Lào và một bộ phận người Thái đen, Pà Thẻn.</strong>
+              </p>
+              <p data-i18n="en">
+                Today in Vietnam, alongside elderly generations of the <strong>Kinh, Mường, Tày, and Nùng</strong> peoples, tooth blackening continues to be practiced or preserved among <strong>6 to 8 ethnic minority communities</strong> in the Northwest highlands (Lai Châu, Điện Biên, Sơn La), notably the <strong>Lự, Si La, Mảng, Kháng, Cống, Lào, and Black Thái peoples.</strong>
+              </p>
             </div>
             <div>
-              <span class="meaning-tag" id="sim-stage-code">GIAI ĐOẠN 04 / 04</span>
-              <h4 style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--silver-light); margin: 0.2rem 0;" id="sim-stage-title">
-                Đen Nhánh Hạt Huyền (Hoàn Mỹ)
-              </h4>
-              <p style="font-size: 0.85rem; color: var(--silver-mid);" id="sim-stage-desc">
-                Lớp nhựa gáo dừa khóa chặt bề mặt, tạo độ bóng sâu như hạt na, hạt huyền. Cười lên ánh sắc kiêu sa bên đôi môi đỏ trầu.
+              <p data-i18n="vi">
+                Tiêu biểu và sống động nhất là <strong>dân tộc Lự</strong> (tại huyện Tam Đường, Sìn Hồ – tỉnh Lai Châu). Với người Lự, thiếu nữ từ 13–15 tuổi vẫn giữ truyền thống nhuộm răng bằng nhựa cây rừng (cây <em>mạy tỉu</em>) suốt 5–7 đêm liền. Hàm răng đen bóng như hạt huyền là niềm tự hào sắc tộc và vẻ đẹp duyên dáng không thể thiếu trong các lễ hội bản làng.
+              </p>
+              <p data-i18n="en">
+                Most vibrant is the <strong>Lự ethnic group</strong> in Tam Đường and Sìn Hồ districts (Lai Châu Province). Lự girls aged 13–15 still blacken their teeth using smoke and resin from forest <em>mạy tỉu</em> wood over 5–7 nights, celebrating jet-black teeth as a badge of ethnic pride and marriageability.
               </p>
             </div>
           </div>
-
-          <div class="simulator-controls">
-            <input type="range" min="1" max="4" value="4" step="1" class="sim-slider" id="sim-range-slider" aria-label="Chọn giai đoạn nhuộm răng" />
-            <div class="sim-step-buttons">
-              <button type="button" class="sim-step-btn" data-step="1">1. Men Ngà</button>
-              <button type="button" class="sim-step-btn" data-step="2">2. Cánh Kiến Đỏ</button>
-              <button type="button" class="sim-step-btn" data-step="3">3. Phèn Đen</button>
-              <button type="button" class="sim-step-btn active" data-step="4">4. Hạt Huyền</button>
-            </div>
-          </div>
         </div>
 
-        <!-- Right: Handfan Packaging & Process Illustration -->
-        <div class="packaging-art-card">
-          <div class="packaging-preview">
-            <img src="assets/art-handfan.png" alt="Thiết kế bao bì Handfan Răng Đen Môi Đỏ (@neneneth)" />
+        <!-- Strip 2: Southeast Asian & Asian Connections -->
+        <div class="index-strip-row">
+          <div class="index-strip-title" data-i18n="vi">
+            LIÊN HỆ ĐÔNG NAM Á<br />&amp; CHÂU Á CỔ ĐẠI
           </div>
-          <div>
-            <span class="meaning-tag">ARTWORK &amp; PACKAGING</span>
-            <h3 style="font-family: var(--font-serif); font-size: 1.55rem; margin: 0.25rem 0 0.5rem;">
-              Ấn Phẩm “Răng Đen Môi Đỏ” Handfan
-            </h3>
-            <p style="font-size: 0.86rem; color: var(--silver-mid); margin-bottom: 1rem;">
-              Lấy cảm hứng từ nền gạch bông xanh lục bảo cổ điển, chuỗi hạt huyền và nét chữ khảm bạc nghệ thuật (<em>@neneneth</em>), dự án tái hiện vẻ đẹp truyền thống qua ngôn ngữ thiết kế đương đại.
-            </p>
-            <div class="archive-photo-box" style="margin-bottom: 0.9rem;">
-              <img src="assets/process-art.jpg" alt="Chưng cất nhựa gáo dừa trên bếp than hồng" style="height: 120px; filter: none;" />
+          <div class="index-strip-title" data-i18n="en">
+            SOUTHEAST ASIAN<br />&amp; ASIAN PARALLELS
+          </div>
+
+          <div class="index-strip-body">
+            <div>
+              <p data-i18n="vi">
+                Đặt trong bức tranh rộng lớn của khu vực, tục nhuộm răng đen là di sản văn hóa chung của vành đai cư dân nông nghiệp nhiệt đới <strong>Đông Nam Á</strong>: từ người Lào, người Thái ở lưu vực sông Mê Kông, người Shan ở Myanmar, cho đến các bộ tộc bản địa tại đảo Luzon, Mindanao (Philippines) và quần đảo Indonesia (tục <em>Sisig</em>).
+              </p>
+              <p data-i18n="en">
+                Within the broader regional tapestry, tooth blackening represents a shared cultural heritage across <strong>Southeast Asia</strong>: practiced by Lao and Thai communities along the Mekong, the Shan of Myanmar, and indigenous Austronesian groups across Luzon and Mindanao (the Philippines) and the Indonesian archipelago.
+              </p>
             </div>
-            <button type="button" class="action-btn-primary" id="btn-card-open-qr" style="width: 100%;">
-              ▣ Mở Mã QR Kết Nối Ấn Phẩm
-            </button>
+            <div>
+              <p data-i18n="vi">
+                Tại Đông Á, tập tục này có sự tương đồng thú vị với tục <strong>Ohaguro (お歯黒)</strong> của Nhật Bản kéo dài từ thời Heian đến cuối thời Minh Trị — nơi phụ nữ quý tộc và võ sĩ Samurai nhuộm răng đen bằng dung dịch sắt ngâm giấm (<em>Kanemizu</em>) và bột ngũ bội tử như biểu tượng của sự thủy chung và thanh cao.
+              </p>
+              <p data-i18n="en">
+                In East Asia, the custom shares a striking parallel with Japanese <strong>Ohaguro (お歯黒)</strong> from the Heian through Meiji periods, where aristocrats and married women dyed their teeth black using iron-acetate solution (<em>Kanemizu</em>) and gallnut tannin as an emblem of maturity and fidelity.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </section>
 
+      <!-- ================================================================
+           SECTION 05: PROJECT INSPIRATION — RĂNG ĐEN (NHUỘM) & MÔI ĐỎ (ĂN TRẦU)
+           ================================================================ -->
+      <div class="editorial-section-divider">
+        <span data-i18n="vi">TÂM ĐIỂM DỰ ÁN // NGUỒN CẢM HỨNG “RĂNG ĐEN – MÔI ĐỎ”</span>
+        <span data-i18n="en">PROJECT FOCUS // THE INSPIRATION OF “BLACK TEETH – RED LIPS”</span>
+        <span>CONCEPT BY @NENENETH</span>
+      </div>
+
+      <section class="project-manifesto-section">
+        <div class="manifesto-typography-stack" data-i18n="vi">
+          RĂNG ĐEN <em>nhuộm hạt huyền</em> • MÔI ĐỎ <em>thắm vị trầu</em><br />
+          LỜI CA DAO CỔ • GẠCH BÔNG XANH LỤC BẢO<br />
+          GIAO THOA DI SẢN &amp; NGHỆ THUẬT ĐƯƠNG ĐẠI
+        </div>
+        <div class="manifesto-typography-stack" data-i18n="en">
+          BLACK TEETH <em>dyed in obsidian</em> • RED LIPS <em>stained with betel</em><br />
+          FOLK POETRY • EMERALD CERAMIC TILES<br />
+          HERITAGE REIMAGINED IN CONTEMPORARY ART
+        </div>
+
+        <div class="project-artwork-showcase">
+          <div class="artwork-pair-grid">
+            <img src="assets/art-hero.jpg" alt="Tác phẩm Răng Đen Môi Đỏ (@neneneth)" />
+            <img src="assets/art-strip.png" alt="Thiết kế quạt cầm tay Handfan Răng Đen Môi Đỏ" />
+          </div>
+
+          <div class="news-col" style="border: none; padding: 0;">
+            <span class="byline-tag" data-i18n="vi">Từ Miếng Trầu Đỏ Thắm Đến Dự Án Nghệ Thuật “Răng Đen Môi Đỏ”</span>
+            <span class="byline-tag" data-i18n="en">From Betel-Stained Lips to the “Răng Đen Môi Đỏ” Art Project</span>
+
+            <p data-i18n="vi">
+              Trong văn hóa truyền thống Việt Nam, <strong>nhuộm răng đen</strong> và <strong>ăn trầu</strong> là hai nửa không thể tách rời. Miếng trầu têm cánhượng (kết hợp lá trầu không cay nồng, quả cau ngọt chát, chút vôi tôi trắng và vỏ chay) khi nhai tạo nên sắc đỏ hồng rực rỡ trên đôi môi, đồng thời sát khuẩn và làm cho lớp men răng đen càng thêm bóng mượt như gương.
+            </p>
+            <p data-i18n="en">
+              In Vietnamese tradition, <strong>tooth blackening</strong> and <strong>betel chewing</strong> are inseparable companions. The betel quid — combining piper betle leaf, areca nut, slaked lime, and forest bark — stains the lips a vivid crimson while naturally polishing and disinfecting the blackened tooth enamel.
+            </p>
+
+            <p data-i18n="vi">
+              Sự tương phản thị giác mãnh liệt giữa <strong>Răng Đen (do nhuộm hạt huyền)</strong> và <strong>Môi Đỏ (do ăn trầu)</strong> đã đi vào ca dao: <em>“Năm quan mua lấy miệng cười / Mười quan chẳng tiếc, tiếc người răng đen”</em>. Đó chính là nguồn cảm hứng cốt lõi cho dự án thiết kế <strong>“Răng Đen Môi Đỏ” (@neneneth)</strong> — tái hiện vẻ đẹp kiêu hãnh của người Việt xưa qua bảng màu gạch bông xanh lục bảo, sắc hồng môi trầu và ấn phẩm quạt cầm tay (<em>Handfan</em>) mang hơi thở nghệ thuật đương đại.
+            </p>
+            <p data-i18n="en">
+              This striking visual contrast between <strong>Black Teeth (from lacquer dyeing)</strong> and <strong>Red Lips (from betel chewing)</strong> inspired timeless folk verses: <em>“Five strings of coins to buy a smile / Ten I would gladly spend for the one with blackened teeth.”</em> This duality forms the heart of the <strong>“Răng Đen Môi Đỏ” (@neneneth)</strong> art and Handfan design project — translating ancient Vietnamese pride into a contemporary visual language.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Newspaper Colophon & Inline QR Footer -->
+      <footer class="newspaper-colophon">
+        <div class="colophon-qr-box" id="qr-broadsheet-box" title="Quét mã QR"></div>
+        <div>
+          <strong style="font-family: var(--font-masthead); font-size: 1.15rem; display: block; color: var(--ink-primary);" data-i18n="vi">
+            ẤN BẢN ĐIỆN TỬ QUÉT QUA MÃ QR — RĂNG ĐEN MÔI ĐỎ
+          </strong>
+          <strong style="font-family: var(--font-masthead); font-size: 1.15rem; display: block; color: var(--ink-primary);" data-i18n="en">
+            QR DIGITAL BROADSHEET EDITION — RĂNG ĐEN MÔI ĐỎ
+          </strong>
+          <p style="font-size: 0.82rem; color: var(--ink-secondary); margin-top: 0.2rem;" data-i18n="vi">
+            Quét mã QR bằng điện thoại để đọc bản thiết kế dọc (Mobile Newspaper Edition) hoặc nhấn nút bên phải để tải thẻ QR triển lãm.
+          </p>
+          <p style="font-size: 0.82rem; color: var(--ink-secondary); margin-top: 0.2rem;" data-i18n="en">
+            Scan the QR code with your phone to read the vertical Mobile Newspaper Edition, or click the button on the right to download the exhibition QR card.
+          </p>
+        </div>
+        <button type="button" class="paper-btn" id="btn-footer-open-qr">
+          <span data-i18n="vi">▣ Phóng To &amp; Tải QR</span>
+          <span data-i18n="en">▣ Enlarge &amp; Download QR</span>
+        </button>
+      </footer>
+
+    </article>
   </main>
 
   <!-- ====================================================================
-       2. GIAO DIỆN ĐIỆN THOẠI & TRẠM QUÉT QR (MOBILE ZINE + QR COMPANION)
+       2. GIAO DIỆN ĐIỆN THOẠI & TRẠM MÃ QR (MOBILE VERTICAL NEWSPAPER)
+       (Formatted like the vertical Helmut Newton editorial sheet)
        ==================================================================== -->
-  <section class="mobile-showcase-wrapper" id="mobile-view-section" aria-label="Giao diện điện thoại và mã QR">
+  <section class="mobile-newspaper-wrapper" id="mobile-view-section">
 
-    <!-- Left: Interactive Mobile Zine Frame -->
-    <div class="phone-device-frame">
-      <div class="phone-notch-bar">
-        <span>9:41</span>
-        <div class="phone-dynamic-island"></div>
-        <span>5G 100%</span>
+    <!-- Left: Vertical Mobile Newspaper Sheet -->
+    <div class="mobile-paper-frame">
+      <div class="m-paper-header">
+        <span style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--accent-gold);">
+          EST. VĂN LANG – ÂU LẠC // ISSUE 01
+        </span>
+        <div class="m-paper-title">RĂNG ĐEN MÔI ĐỎ</div>
+        <span style="font-family: var(--font-serif); font-style: italic; font-size: 0.85rem; color: var(--accent-magenta-soft);" data-i18n="vi">
+          Ấn Bản Báo Chí Di Sản Trên Điện Thoại
+        </span>
+        <span style="font-family: var(--font-serif); font-style: italic; font-size: 0.85rem; color: var(--accent-magenta-soft);" data-i18n="en">
+          Mobile Heritage Newspaper Edition
+        </span>
       </div>
 
-      <div class="phone-scroll-screen" id="phone-scroll-container">
-        <!-- Mobile Cover -->
-        <div class="m-hero" id="m-sec-cover">
-          <img src="assets/art-hero.jpg" alt="Bìa tạp chí di động Răng Đen Môi Đỏ" />
-          <div class="m-hero-overlay">
-            <div class="m-top-pill">
-              <span>MOBILE ZINE // NO.01</span>
-              <span style="color: var(--magenta-bright);">● LIVE</span>
-            </div>
-            <div>
-              <span class="m-kicker">Tục Cổ Truyền Việt Nam</span>
-              <div class="m-title-script">Răng đen Môi đỏ</div>
-              <p style="font-size: 0.78rem; color: var(--silver-mid); margin-top: 0.35rem;">
-                “Năm quan mua lấy miệng cười / Mười quan chẳng tiếc, tiếc người răng đen”
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mobile Concise Intro -->
-        <div class="m-section" id="m-sec-meaning">
-          <span class="m-kicker">01 // Ý Nghĩa Thẩm Mỹ</span>
-          <h3 class="m-heading">Mỹ Học “Hạt Huyền”</h3>
-          <p style="font-size: 0.82rem; color: var(--silver-mid); margin-bottom: 0.9rem;">
-            Tục nhuộm răng đen xuất hiện từ thời Văn Lang – Âu Lạc. Hàm răng đen bóng như hạt huyền đi cùng môi đỏ trầu là biểu tượng của sự trưởng thành, duyên dáng và giúp bảo vệ men răng bền chắc.
-          </p>
-
-          <!-- Horizontal Swipe Cards for Mobile -->
-          <div class="m-swipe-cards">
-            <div class="m-swipe-card">
-              <h4>Tương Phản Tuyệt Mỹ</h4>
-              <p>Răng đen nhánh tôn bật sắc môi đỏ ăn trầu và làn da trắng ngần của người phụ nữ Việt.</p>
-            </div>
-            <div class="m-swipe-card">
-              <h4>Nghi Thức Trưởng Thành</h4>
-              <p>Thiếu nữ tuổi cập kê nhuộm răng để khẳng định nền nếp gia phong và sự chín chắn.</p>
-            </div>
-            <div class="m-swipe-card">
-              <h4>Bảo Vệ Răng Nướu</h4>
-              <p>Nhựa cánh kiến, gáo dừa và phèn đen tạo màng sơn tự nhiên chống sâu răng hiệu quả.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mobile Ingredients & 4 Steps -->
-        <div class="m-section" id="m-sec-process">
-          <span class="m-kicker">02 // Bí Thuật Dân Gian</span>
-          <h3 class="m-heading">Nguyên Liệu &amp; 4 Bước Nhuộm</h3>
-          <img src="assets/ingredients-art.jpg" alt="Nguyên liệu nhuộm răng" style="width: 100%; height: 155px; object-fit: cover; border-radius: 12px; margin-bottom: 0.85rem; border: 1px solid var(--border-subtle);" />
-
-          <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.8rem;">
-            <div style="background: rgba(20,60,68,0.6); padding: 0.7rem 0.85rem; border-radius: 10px; border-left: 3px solid var(--gold-accent);">
-              <strong style="color: var(--silver-light);">B1. Khử Men (1–2 ngày):</strong> Chà vỏ cau, ngậm chanh/giấm làm sạch răng.
-            </div>
-            <div style="background: rgba(20,60,68,0.6); padding: 0.7rem 0.85rem; border-radius: 10px; border-left: 3px solid var(--magenta-primary);">
-              <strong style="color: var(--silver-light);">B2. Nhuộm Đỏ (3–4 đêm):</strong> Đắp nhựa cánh kiến đỏ và vỏ lựu lên răng.
-            </div>
-            <div style="background: rgba(20,60,68,0.6); padding: 0.7rem 0.85rem; border-radius: 10px; border-left: 3px solid var(--bg-teal-bright);">
-              <strong style="color: var(--silver-light);">B3. Vào Đen (2–3 đêm):</strong> Phết phèn đen &amp; ngũ bội tử chuyển màu đen.
-            </div>
-            <div style="background: rgba(20,60,68,0.6); padding: 0.7rem 0.85rem; border-radius: 10px; border-left: 3px solid #fff;">
-              <strong style="color: var(--silver-light);">B4. Lên Hạt Huyền:</strong> Quết nhựa đốt từ gáo dừa khô tạo độ bóng gương.
-            </div>
-          </div>
-        </div>
-
-        <!-- Mobile Art Gallery -->
-        <div class="m-section" id="m-sec-gallery" style="border-bottom: none;">
-          <span class="m-kicker">03 // Bộ Sưu Tập Thị Giác</span>
-          <h3 class="m-heading">Di Sản &amp; Đương Đại</h3>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem;">
-            <img src="assets/art-strip.png" alt="Răng đen môi đỏ strip" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-subtle);" />
-            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
-              <img src="assets/process-art.jpg" alt="Chưng nhựa gáo dừa" style="width: 100%; height: 86px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-subtle);" />
-              <img src="assets/heritage-art.jpg" alt="Thiếu nữ khăn mỏ quạ" style="width: 100%; height: 86px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-subtle);" />
-            </div>
-          </div>
-        </div>
+      <!-- Mobile Block 1: Origins & Anti-Assimilation -->
+      <div class="m-paper-block">
+        <h3 data-i18n="vi">1. Nguồn Gốc &amp; “Vũ Khí” Chống Đồng Hóa Phương Bắc</h3>
+        <h3 data-i18n="en">1. Origins &amp; Cultural Weapon Against Northern Assimilation</h3>
+        <img src="assets/real-young-woman.jpg" alt="Thiếu nữ Bắc Kỳ xưa răng đen" />
+        <p data-i18n="vi">
+          Khởi nguồn từ thời Văn Lang – Âu Lạc (hơn 2.000 năm trước), tục nhuộm răng đen là bản sắc tự nhận diện của người Lạc Việt. Suốt 1.000 năm Bắc thuộc và thời kỳ nhà Minh cưỡng bức “óc phát bạch xỉ” (cắt tóc, để răng trắng), người Việt kiên cường giữ hàm răng đen như một vũ khí văn hóa chống đồng hóa, kết tinh trong lời hịch của Vua Quang Trung (1789): <em>“Đánh cho để dài tóc / Đánh cho để đen răng”</em>.
+        </p>
+        <p data-i18n="en">
+          Originating in the Văn Lang – Âu Lạc era over 2,000 years ago, tooth blackening defined Lạc Việt identity. Across a millennium of Northern rule and Ming dynasty decrees forcing “cropped hair and white teeth,” the Vietnamese preserved blackened teeth as a cultural weapon against assimilation — immortalized in Emperor Quang Trung’s 1789 battle edict: <em>“Fight to keep our hair long / Fight to keep our teeth black.”</em>
+        </p>
       </div>
 
-      <!-- Sticky Mobile Bottom Tab Bar -->
-      <nav class="m-bottom-nav" aria-label="Điều hướng trên điện thoại">
-        <button type="button" class="m-nav-item active" data-target="m-sec-cover">
-          <span>✦</span>
-          <span>Bìa Zine</span>
-        </button>
-        <button type="button" class="m-nav-item" data-target="m-sec-meaning">
-          <span>❖</span>
-          <span>Ý Nghĩa</span>
-        </button>
-        <button type="button" class="m-nav-item" data-target="m-sec-process">
-          <span>◈</span>
-          <span>Quy Trình</span>
-        </button>
-        <button type="button" class="m-nav-item" data-target="m-sec-gallery">
-          <span>▣</span>
-          <span>Nghệ Thuật</span>
-        </button>
-      </nav>
+      <!-- Mobile Block 2: Who Dyed Teeth? -->
+      <div class="m-paper-block">
+        <h3 data-i18n="vi">2. Những Ai Phải Nhuộm Răng Đen?</h3>
+        <h3 data-i18n="en">2. Who Practiced Tooth Blackening?</h3>
+        <img src="assets/real-man-elder.jpg" alt="Cụ ông người Việt nhuộm răng đen" />
+        <p data-i18n="vi">
+          Không riêng phụ nữ mà <strong>cả đàn ông, từ nông dân, nho sĩ đến quan lại và vua chúa</strong> đều nhuộm răng đen khi bước vào tuổi trưởng thành (13–16 tuổi). Người để răng trắng từng bị xem là chưa trưởng thành hoặc ngoại lai.
+        </p>
+        <p data-i18n="en">
+          Not only women, but <strong>men, scholars, mandarins, and royalty alike</strong> dyed their teeth black upon reaching adulthood (ages 13–16). Un-dyed white teeth were historically viewed as immature or foreign.
+        </p>
+      </div>
+
+      <!-- Mobile Block 3: Archaeology & Science -->
+      <div class="m-paper-block">
+        <h3 data-i18n="vi">3. Bằng Chứng Khảo Cổ &amp; Khoa Học Sức Khỏe</h3>
+        <h3 data-i18n="en">3. Archaeological &amp; Scientific Health Evidence</h3>
+        <img src="assets/real-woman-smile.jpg" alt="Cụ bà với hàm răng đen chắc khỏe" />
+        <p data-i18n="vi">
+          Các cuộc khai quật di chỉ Văn hóa Đông Sơn (Châu Can, Núi Nấp, Làng Vạc) phát hiện nhiều di cốt 2.000 năm tuổi có hàm răng đen nguyên vẹn, không sâu răng. Khoa học giải mã hỗn hợp <em>Tannin</em>, nhựa cánh kiến (<em>Shellac</em>), phèn đen và nhựa đốt gáo dừa tạo thành lớp “sơn mài sinh học” diệt khuẩn và bảo vệ men răng suốt đời.
+        </p>
+        <p data-i18n="en">
+          Excavations at Đông Sơn sites (Châu Can, Núi Nấp, Làng Vạc) revealed 2,000-year-old remains with intact, cavity-free blackened teeth. Science confirms that <em>Tannin</em>, <em>Shellac</em>, iron alum, and coconut shell tar form an antibacterial bio-lacquer that seals enamel for life.
+        </p>
+      </div>
+
+      <!-- Mobile Block 4: 4 Basic Steps & Ethnic Groups Today -->
+      <div class="m-paper-block">
+        <h3 data-i18n="vi">4. Quy Trình 4 Bước &amp; Các Dân Tộc Còn Duy Trì</h3>
+        <h3 data-i18n="en">4. The 4-Step Process &amp; Ethnic Groups Today</h3>
+        <img src="assets/real-oger-1909.jpg" alt="Khắc gỗ Nhuộm răng 1909" style="object-fit: contain; background: #d8be42;" />
+        <p data-i18n="vi">
+          <strong>Quy trình 4 bước:</strong> (1) Chà vỏ cau, ngậm chanh khử men → (2) Đắp nhựa cánh kiến nhuộm đỏ 3–4 đêm → (3) Vào phèn đen và ngũ bội tử 2–3 đêm → (4) Quết nhựa đốt gáo dừa lên nước hạt huyền.<br />
+          <strong>Hiện nay tại VN:</strong> Còn lưu giữ ở khoảng 6–8 dân tộc vùng Tây Bắc (tiêu biểu nhất là dân tộc <strong>Lự</strong> ở Lai Châu, cùng người <strong>Si La, Mảng, Kháng, Cống, Lào, Thái</strong>) và tương đồng với phong tục tại Đông Nam Á (Lào, Thái Lan, Myanmar, Philippines, Indonesia).
+        </p>
+        <p data-i18n="en">
+          <strong>4 Basic Steps:</strong> (1) Areca husk &amp; lemon etching → (2) Red sticklac base for 3–4 nights → (3) Black iron alum &amp; gallnut for 2–3 nights → (4) Coconut shell tar glaze.<br />
+          <strong>Today in Vietnam:</strong> Maintained among 6–8 ethnic groups in the Northwest (most notably the <strong>Lự</strong> in Lai Châu, alongside the <strong>Si La, Mảng, Kháng, Cống, Lào, Thái</strong>), connecting with wider Southeast Asian traditions.
+        </p>
+      </div>
+
+      <!-- Mobile Block 5: Project Inspiration -->
+      <div class="m-paper-block" style="border-bottom: none; padding-bottom: 0;">
+        <h3 data-i18n="vi">5. Cảm Hứng Dự Án: Răng Đen (Nhuộm) – Môi Đỏ (Ăn Trầu)</h3>
+        <h3 data-i18n="en">5. Project Inspiration: Black Teeth &amp; Betel-Red Lips</h3>
+        <img src="assets/art-hero.jpg" alt="Tác phẩm Răng Đen Môi Đỏ (@neneneth)" />
+        <p data-i18n="vi">
+          Sự giao hòa giữa hàm <strong>Răng Đen</strong> (nhuộm hạt huyền) và đôi <strong>Môi Đỏ</strong> (nhai trầu cau) là nguồn cảm hứng cho dự án nghệ thuật <strong>“Răng Đen Môi Đỏ” (@neneneth)</strong> trên chất liệu gạch bông xanh lục bảo và sắc hồng cánh sen.
+        </p>
+        <p data-i18n="en">
+          The harmony between <strong>Black Teeth</strong> (lacquer dyeing) and <strong>Red Lips</strong> (betel chewing) inspires the <strong>“Răng Đen Môi Đỏ” (@neneneth)</strong> art project, set against emerald ceramic tiles and betel-crimson accents.
+        </p>
+      </div>
     </div>
 
-    <!-- Right: QR Code Exhibition Hub & Instructions -->
-    <div class="mobile-companion-panel">
-      <div class="qr-station-card">
-        <span class="section-kicker">Cơ Chế Hoạt Động // Scan-to-Read</span>
-        <h2 class="editorial-headline" style="margin-bottom: 0.5rem;">
-          Trạm Quét Mã <em>QR</em> Triển Lãm
-        </h2>
-        <p style="font-size: 0.92rem; color: var(--silver-mid);">
-          Người xem dùng camera điện thoại quét mã QR bên dưới (hoặc in trên bao bì quạt cầm tay <strong>Handfan Răng Đen Môi Đỏ</strong>) để mở ngay ấn phẩm tạp chí số tối ưu cho màn hình dọc.
-        </p>
+    <!-- Right: QR Code Exhibition Hub -->
+    <div class="qr-hub-card">
+      <span style="font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em; color: var(--accent-gold); display: block; margin-bottom: 0.35rem;">
+        ✦ SCAN TO READ // TRẠM QUÉT MÃ QR ✦
+      </span>
+      <h2 style="font-family: var(--font-masthead); font-size: 1.85rem; margin-bottom: 0.5rem;" data-i18n="vi">
+        Mã QR Truy Cập Ấn Bản Báo Chí
+      </h2>
+      <h2 style="font-family: var(--font-masthead); font-size: 1.85rem; margin-bottom: 0.5rem;" data-i18n="en">
+        QR Code Access to the Digital Newspaper
+      </h2>
+      <p style="font-size: 0.88rem; color: var(--ink-secondary);" data-i18n="vi">
+        Khi độc giả quét mã QR này bằng điện thoại, trang báo sẽ mở cổng chọn ngôn ngữ (Tiếng Việt / Tiếng Anh) và hiển thị trực tiếp bố cục báo dọc tối ưu cho di động.
+      </p>
+      <p style="font-size: 0.88rem; color: var(--ink-secondary);" data-i18n="en">
+        When readers scan this QR code on their smartphone, the language verification gate (Vietnamese / English) opens and presents the mobile newspaper layout.
+      </p>
 
-        <div class="qr-station-layout">
-          <div class="qr-poster-box">
-            <div class="qr-white-pad" id="qr-companion-box"></div>
-            <span style="font-family: var(--font-script); font-size: 1.55rem; color: var(--silver-light); display: block; line-height: 1;">
-              Răng đen Môi đỏ
-            </span>
-            <span style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--gold-accent); letter-spacing: 0.14em;">
-              SCAN FOR DIGITAL ZINE
-            </span>
-          </div>
-
-          <div>
-            <h4 style="font-family: var(--font-serif); font-size: 1.35rem; margin-bottom: 0.4rem;">
-              Tùy Chỉnh Đường Dẫn Mã QR
-            </h4>
-            <p style="font-size: 0.82rem; color: var(--silver-mid); margin-bottom: 0.75rem;">
-              Mặc định mã QR trỏ tới địa chỉ mạng nội bộ (Wi-Fi LAN) kèm tham số <code>?view=mobile</code> để điện thoại quét vào thẳng giao diện Mobile Zine. Bạn cũng có thể nhập link bất kỳ:
-            </p>
-
-            <div class="url-input-group">
-              <input type="text" id="qr-url-input" class="url-input" value="https://ducthanh582.github.io/rang-den-moi-do/?view=mobile" aria-label="Đường dẫn tạo mã QR" />
-              <button type="button" class="action-btn-primary" id="btn-update-qr">Cập nhật QR</button>
-            </div>
-
-            <div style="display: flex; gap: 0.65rem; margin-top: 1rem; flex-wrap: wrap;">
-              <button type="button" class="action-btn-primary" id="btn-download-qr-poster">
-                ⬇ Tải Thẻ QR Nghệ Thuật (.PNG)
-              </button>
-              <button type="button" class="qr-trigger-btn" id="btn-reset-lan-url">
-                Đặt lại IP Wi-Fi (192.168.0.91)
-              </button>
-            </div>
-          </div>
+      <div class="qr-hub-grid">
+        <div style="text-align: center;">
+          <div class="qr-mount-frame" id="qr-mobile-box"></div>
+          <span style="font-family: var(--font-script); font-size: 1.5rem; color: var(--ink-primary); display: block; margin-top: 0.45rem;">
+            Răng đen Môi đỏ
+          </span>
         </div>
-      </div>
 
-      <!-- How the Dual-Interface Works Card -->
-      <div class="editorial-lead-card" style="padding: 1.65rem;">
-        <span class="meaning-tag">THIẾT KẾ HAI GIAO DIỆN ĐỒNG BỘ</span>
-        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin: 0.3rem 0 0.75rem;">
-          Tương Thích Trình Chiếu &amp; Quét Di Động
-        </h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.85rem; color: var(--silver-mid);">
-          <div style="background: rgba(7,22,25,0.55); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-            <strong style="color: var(--magenta-bright); display: block; margin-bottom: 0.25rem;">1. Giao Diện Web (Desktop)</strong>
-            Dàn trang dạng tạp chí nghệ thuật đa cột (Editorial Spread), tích hợp mô phỏng nhuộm răng tương tác và góc quét QR trực tiếp.
+        <div>
+          <label for="qr-url-input" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-gold); display: block;">
+            LINK MÃ QR (HOẠT ĐỘNG 24/7):
+          </label>
+          <div class="qr-input-row">
+            <input type="text" id="qr-url-input" class="qr-input" value="https://ducthanh582.github.io/rang-den-moi-do/?view=mobile" />
+            <button type="button" class="paper-btn" id="btn-update-qr">OK</button>
           </div>
-          <div style="background: rgba(7,22,25,0.55); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
-            <strong style="color: var(--gold-accent); display: block; margin-bottom: 0.25rem;">2. Giao Diện Điện Thoại (Mobile)</strong>
-            Tự động kích hoạt khi người xem quét mã QR trên điện thoại — bố cục thẻ lướt (Swipe Zine) cô đọng, thanh điều hướng ngón cái tiện lợi.
+
+          <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.85rem;">
+            <button type="button" class="paper-btn" id="btn-download-qr-poster">
+              <span data-i18n="vi">⬇ Tải Thẻ QR In Ấn (.PNG)</span>
+              <span data-i18n="en">⬇ Download Printable QR Card (.PNG)</span>
+            </button>
+            <button type="button" class="qr-top-btn" id="btn-reopen-captcha">
+              <span data-i18n="vi">🔄 Xem Lại Cổng Captcha Ngôn Ngữ</span>
+              <span data-i18n="en">🔄 Reopen Language Captcha Gate</span>
+            </button>
           </div>
         </div>
       </div>
@@ -556,62 +705,38 @@
   </section>
 
   <!-- ====================================================================
-       3. FULL-SCREEN QR EXHIBITION MODAL (FOR SCANNING & DOWNLOADING POSTER)
+       3. QR EXHIBITION MODAL
        ==================================================================== -->
-  <div class="qr-modal-backdrop" id="qr-modal" role="dialog" aria-modal="true" aria-labelledby="qr-modal-title">
-    <div class="qr-modal-card">
-      <button type="button" class="modal-close-btn" id="btn-close-qr-modal" aria-label="Đóng">✕</button>
+  <div class="qr-modal-backdrop" id="qr-modal" role="dialog" aria-modal="true">
+    <div class="qr-modal-sheet">
+      <button type="button" class="modal-close-x" id="btn-close-qr-modal" aria-label="Close">✕</button>
+      <span style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.16em; color: var(--accent-gold);">
+        EXHIBITION QR PASS // MÃ QR TRIỂN LÃM
+      </span>
+      <h3 style="font-family: var(--font-masthead); font-size: 1.75rem; margin: 0.35rem 0 0.75rem;">
+        RĂNG ĐEN MÔI ĐỎ — QR CODE
+      </h3>
 
-      <span class="section-kicker">Exhibition Access // Quét Mã QR</span>
-      <h2 class="editorial-headline" id="qr-modal-title" style="margin-bottom: 0.4rem;">
-        Quét QR Để Bước Vào <em>Răng Đen Môi Đỏ</em>
-      </h2>
-      <p style="font-size: 0.88rem; color: var(--silver-mid); margin-bottom: 1.35rem;">
-        Hướng camera điện thoại vào mã QR bên dưới để mở ấn phẩm tạp chí số, hoặc tải thẻ QR nghệ thuật để in kèm sản phẩm.
-      </p>
-
-      <div class="qr-station-layout" style="margin-top: 0;">
-        <div class="qr-poster-box">
-          <div class="qr-white-pad" id="qr-modal-box"></div>
-          <span style="font-family: var(--font-script); font-size: 1.55rem; color: var(--silver-light); display: block; line-height: 1;">
-            Răng đen Môi đỏ
-          </span>
-          <span style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--gold-accent); letter-spacing: 0.14em;">
-            @NENENETH ART ZINE
-          </span>
-        </div>
-
+      <div class="qr-hub-grid">
+        <div class="qr-mount-frame" id="qr-modal-box"></div>
         <div>
-          <label for="qr-modal-url-input" class="meaning-tag" style="display: block; margin-bottom: 0.35rem;">
-            ĐƯỜNG DẪN ĐÍCH CỦA MÃ QR:
-          </label>
-          <div class="url-input-group" style="margin-top: 0; margin-bottom: 1rem;">
-            <input type="text" id="qr-modal-url-input" class="url-input" value="https://ducthanh582.github.io/rang-den-moi-do/?view=mobile" />
-            <button type="button" class="action-btn-primary" id="btn-modal-update-qr">Đổi</button>
-          </div>
-
-          <p style="font-size: 0.8rem; color: var(--silver-mid); margin-bottom: 1rem;">
-            💡 <strong>Mẹo trình chiếu:</strong> Nếu điện thoại và máy tính kết nối cùng mạng Wi-Fi, quét mã mặc định (<code>https://ducthanh582.github.io/rang-den-moi-do/?view=mobile</code>) sẽ mở trực tiếp trang web trên điện thoại.
+          <p style="font-size: 0.86rem; color: var(--ink-secondary); margin-bottom: 0.75rem;" data-i18n="vi">
+            Quét mã QR bằng camera điện thoại để vào trang báo (tích hợp sẵn cổng chọn ngôn ngữ Tiếng Việt / Tiếng Anh).
           </p>
-
-          <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
-            <button type="button" class="action-btn-primary" id="btn-modal-download-poster">
-              ⬇ Tải Thẻ QR Nghệ Thuật (.PNG)
-            </button>
-            <button type="button" class="qr-trigger-btn" id="btn-modal-go-mobile">
-              📱 Xem Giao diện Điện thoại
-            </button>
+          <p style="font-size: 0.86rem; color: var(--ink-secondary); margin-bottom: 0.75rem;" data-i18n="en">
+            Scan with your phone camera to open the digital newspaper (featuring the Vietnamese / English verification gate).
+          </p>
+          <div class="qr-input-row">
+            <input type="text" id="qr-modal-url-input" class="qr-input" value="https://ducthanh582.github.io/rang-den-moi-do/?view=mobile" />
+            <button type="button" class="paper-btn" id="btn-modal-update-qr">OK</button>
           </div>
+          <button type="button" class="paper-btn" id="btn-modal-download-poster" style="margin-top: 0.5rem; width: 100%;">
+            ⬇ Download QR Poster (.PNG)
+          </button>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer class="zine-footer">
-    <p>RĂNG ĐEN MÔI ĐỎ — TẠP CHÍ SỐ NGHỆ THUẬT GIỚI THIỆU TỤC NHUỘM RĂNG ĐEN CỔ TRUYỀN VIỆT NAM</p>
-    <p style="margin-top: 0.35rem; opacity: 0.75;">Tông màu &amp; Cảm hứng thị giác: “Răng đen Môi đỏ” Handfan Artwork (@neneneth) • Giao diện Kép Web &amp; Mobile QR</p>
-  </footer>
 
   <script src="app.js"></script>
 </body>
