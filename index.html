@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Răng Đen Môi Đỏ — Tạp Chí Nghệ Thuật Tục Nhuộm Răng Đen Việt Nam</title>
+  <meta name="description" content="Ấn phẩm tạp chí số nghệ thuật giới thiệu tục nhuộm răng đen (Răng Đen Môi Đỏ) của người Việt — trải nghiệm song song giao diện Web & Điện thoại qua mã QR." />
+
+  <!-- Google Fonts: Editorial Serif, Script Calligraphy, Sans & Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=Pinyon+Script&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- QRCode Generator Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-view-mode="web">
+
+  <!-- Teal Diamond Ceramic Tile & Vintage Grain Background -->
+  <div class="tile-backdrop" aria-hidden="true"></div>
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- ====================================================================
+       STICKY EDITORIAL TOPBAR: SWITCH BETWEEN WEB UI / MOBILE UI / QR HUB
+       ==================================================================== -->
+  <header class="editorial-topbar">
+    <a href="#top" class="brand-mark">
+      <span class="brand-issue">ZINE NO. 01</span>
+      <span class="brand-title">Răng Đen Môi Đỏ</span>
+    </a>
+
+    <div class="mode-switcher" role="tablist" aria-label="Chuyển đổi giao diện">
+      <button type="button" class="mode-btn active" id="btn-mode-web" data-mode="web" role="tab" aria-selected="true">
+        <span>🖥️</span> Giao diện Web (Tạp chí)
+      </button>
+      <button type="button" class="mode-btn" id="btn-mode-mobile" data-mode="mobile" role="tab" aria-selected="false">
+        <span>📱</span> Giao diện Điện thoại &amp; QR
+      </button>
+    </div>
+
+    <div class="top-actions">
+      <button type="button" class="qr-trigger-btn" id="btn-open-qr-modal">
+        <span>▣</span> Quét Mã QR Triển Lãm
+      </button>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       1. GIAO DIỆN WEB (DESKTOP EDITORIAL ART MAGAZINE SPREADS)
+       ==================================================================== -->
+  <main class="web-magazine-view" id="top">
+
+    <!-- Magazine Masthead -->
+    <section class="zine-masthead">
+      <div class="masthead-meta">
+        <span>ẤN PHẨM VĂN HÓA &amp; THẨM MỸ DÂN GIAN VIỆT NAM</span>
+        <span class="highlight">✦ CHUYÊN ĐỀ: HẠT HUYỀN ÓNG ÁNH ✦</span>
+        <span>ARTWORK CONCEPT: @NENENETH // ISSUE 2026</span>
+      </div>
+
+      <div class="masthead-title-row">
+        <blockquote class="masthead-poem-snippet left">
+          “Năm quan mua lấy miệng cười<br />
+          Mười quan chẳng tiếc, tiếc người răng đen”
+        </blockquote>
+
+        <div class="masthead-logo-lockup">
+          <span class="masthead-script">Răng đen Môi đỏ</span>
+          <span class="masthead-sub">Mỹ Học Hạt Huyền Cổ Truyền</span>
+        </div>
+
+        <blockquote class="masthead-poem-snippet right">
+          “Nhớ hàng tre thẳng đọt măng<br />
+          Nhớ cô con gái hàm răng đen huyền”
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- SPREAD 01: HERO EDITORIAL COVER -->
+    <section class="hero-spread" aria-label="Trang bìa tạp chí">
+      <div class="hero-visual-frame">
+        <img src="assets/art-hero.jpg" alt="Tranh nghệ thuật Răng Đen Môi Đỏ — vẻ đẹp truyền thống giao thoa đương đại" />
+        <div class="hero-floating-tag">
+          <span class="pulse-dot"></span>
+          <span>COVER STORY // NEO-TRADITIONAL ART</span>
+        </div>
+        <div class="hero-caption-bar">
+          <div class="hero-caption-text">
+            “Răng đen ai nhuộm cho mình / Cho duyên mình đượm, cho tình anh say...”
+          </div>
+          <span class="spread-number">TRANG 01 — 04</span>
+        </div>
+      </div>
+
+      <div class="hero-editorial-column">
+        <article class="editorial-lead-card">
+          <span class="section-kicker">Cội Nguồn Mỹ Học Việt</span>
+          <h1 class="editorial-headline">
+            Nụ Cười <em>Hạt Huyền</em> &amp; Bản Sắc Văn Lang
+          </h1>
+          <p class="dropcap-paragraph">
+            Từ thời dựng nước Văn Lang – Âu Lạc cho đến đầu thế kỷ XX, hàm răng đen nhánh như hạt na, hạt huyền kết hợp cùng sắc môi đỏ ăn trầu không chỉ là chuẩn mực sắc đẹp tối thượng, mà còn là tuyên ngôn văn hóa kiêu hãnh của người Việt cổ.
+          </p>
+          <p style="font-size: 0.9rem; color: var(--silver-mid); margin-bottom: 1.25rem;">
+            Không đơn thuần là trang điểm, lớp nhựa cánh kiến và gáo dừa bao bọc men răng như một lớp sơn mài tự nhiên — giúp chắc răng, thơm miệng và khẳng định sự trưởng thành, nền nếp.
+          </p>
+
+          <div class="key-pillars-mini">
+            <div class="pillar-stat">
+              <strong>&gt; 2.000 năm</strong>
+              <span>Lịch sử lưu truyền từ thời Đông Sơn</span>
+            </div>
+            <div class="pillar-stat">
+              <strong>4 Công đoạn</strong>
+              <span>Nhuộm đỏ cánh kiến đến đen huyền</span>
+            </div>
+            <div class="pillar-stat">
+              <strong>Sơn mài sống</strong>
+              <span>Bảo vệ men răng bền bỉ suốt đời</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Quick QR Entry Dock on Hero -->
+        <div class="qr-mini-dock">
+          <div class="qr-mini-canvas-wrap" id="qr-hero-box" title="Quét mã để mở trên điện thoại"></div>
+          <div class="qr-mini-info">
+            <h4>Trải Nghiệm Qua Mã QR</h4>
+            <p>Quét mã bằng camera điện thoại để đọc ấn phẩm ở chế độ Tạp chí Di động (Mobile Zine).</p>
+            <div class="qr-mini-actions">
+              <button type="button" class="mini-link-btn" id="btn-hero-switch-mobile">Xem bản Mobile ngay →</button>
+              <button type="button" class="mini-link-btn" id="btn-hero-open-qr">Phóng to / Tải QR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPREAD 02: Ý NGHĨA VĂN HÓA & TƯ LIỆU (3-COLUMN EDITORIAL BENTO) -->
+    <section class="magazine-spread" id="spread-meaning">
+      <div class="spread-header">
+        <div>
+          <span class="section-kicker">Chuyên Mục 01 // Triết Lý Thẩm Mỹ</span>
+          <h2 class="editorial-headline" style="margin-bottom:0;">Vì Sao Người Việt Xưa Chuộng <em>Răng Đen</em>?</h2>
+        </div>
+        <span class="spread-number">SPREAD 02 // CULTURAL IDENTITY</span>
+      </div>
+
+      <div class="meaning-grid">
+        <!-- Left: Vertical Art Strip from User's Handfan Artwork -->
+        <div class="strip-showcase-card">
+          <img src="assets/art-strip.png" alt="Dải gạch xanh cổ điển và chiếc răng nhuộm đen hạt huyền" />
+          <div class="strip-overlay-badge">
+            <span class="meaning-tag">BIỂU TƯỢNG THỊ GIÁC</span>
+            <p style="font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; color: var(--silver-light); margin-top: 0.25rem;">
+              Từ men ngà tự nhiên hóa sắc đen huyền bí
+            </p>
+          </div>
+        </div>
+
+        <!-- Middle: 3 Concise Editorial Pillars -->
+        <div class="meaning-cards-stack">
+          <article class="meaning-item-card">
+            <div class="meaning-item-header">
+              <span class="meaning-tag">01 // THẨM MỸ TƯƠNG PHẢN</span>
+              <span>✦</span>
+            </div>
+            <h3>Tôn Vinh “Răng Đen – Môi Đỏ – Da Trắng”</h3>
+            <p>
+              Trong nghệ thuật thị giác truyền thống, sắc đen nhánh ánh gương của hàm răng tạo độ tương phản tuyệt mỹ với đôi môi đỏ thắm vị trầu cau và làn da trắng ngần dưới vành khăn mỏ quạ.
+            </p>
+          </article>
+
+          <article class="meaning-item-card">
+            <div class="meaning-item-header">
+              <span class="meaning-tag">02 // BẢN SẮC &amp; TRƯỞNG THÀNH</span>
+              <span>✦</span>
+            </div>
+            <h3>Dấu Ấn Văn Minh &amp; Nền Nếp Gia Phong</h3>
+            <p>
+              Người xưa quan niệm hàm răng trắng để mộc là chưa trải sự đời. Thiếu nữ đến tuổi cập kê (13–16 tuổi) bắt đầu nhuộm răng như một nghi thức trưởng thành, thể hiện sự dịu dàng, kín đáo và đảm đang.
+            </p>
+          </article>
+
+          <article class="meaning-item-card">
+            <div class="meaning-item-header">
+              <span class="meaning-tag">03 // Y HỌC DÂN GIAN</span>
+              <span>✦</span>
+            </div>
+            <h3>Lớp “Giáp Sơn Mài” Bảo Vệ Răng Nướu</h3>
+            <p>
+              Hỗn hợp cánh kiến đỏ, nhựa gáo dừa, phèn đen và tannin từ vỏ lựu kết tủa thành màng bảo vệ kháng khuẩn tự nhiên, ngăn ngừa sâu răng, giữ chân răng chắc khỏe đến tuổi xế chiều.
+            </p>
+          </article>
+        </div>
+
+        <!-- Right: Folk Poetry & Historical Photo Archive -->
+        <div class="poetry-archive-card">
+          <blockquote class="ca-dao-quote">
+            “Lấy chồng cho đáng tấm chồng,<br />
+            Bõ công trang điểm má hồng răng đen.”
+            <span>— Ca Dao Cổ Truyền Việt Nam</span>
+          </blockquote>
+
+          <div class="archive-photo-box">
+            <img src="assets/archive-woman.jpg" alt="Tư liệu lịch sử: Nụ cười răng đen của phụ nữ Việt Nam" />
+            <div class="archive-photo-caption">
+              [TƯ LIỆU] Nụ cười hạt huyền mộc mạc của phụ nữ Việt truyền thống (Wikimedia Archive).
+            </div>
+          </div>
+
+          <div class="archive-photo-box">
+            <img src="assets/heritage-art.jpg" alt="Chân dung nghệ thuật phụ nữ Bắc Bộ khăn mỏ quạ răng đen môi đỏ" style="height: 175px; filter: none;" />
+            <div class="archive-photo-caption">
+              [MINH HỌA] Vẻ đẹp Áo ngũ thân, khăn mỏ quạ &amp; nụ cười răng đen.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPREAD 03: NGUYÊN LIỆU BÍ TRUYỀN & QUY TRÌNH 4 BƯỚC -->
+    <section class="magazine-spread" id="spread-craft">
+      <div class="spread-header">
+        <div>
+          <span class="section-kicker">Chuyên Mục 02 // Nghệ Thuật Chế Tác</span>
+          <h2 class="editorial-headline" style="margin-bottom:0;">Bí Thuật Nhuộm <em>Hạt Huyền</em> 4 Giai Đoạn</h2>
+        </div>
+        <span class="spread-number">SPREAD 03 // ALCHEMY &amp; RITUAL</span>
+      </div>
+
+      <div class="craft-grid">
+        <!-- Left: Ingredients Flat-lay Showcase -->
+        <div class="ingredients-showcase">
+          <div class="ingredients-art-banner">
+            <img src="assets/ingredients-art.jpg" alt="Nguyên liệu nhuộm răng đen: Cánh kiến đỏ, nhựa gáo dừa, phèn đen, trầu cau" />
+          </div>
+          <div class="ingredients-list">
+            <div class="ingredient-pill">
+              <strong>Cánh Kiến Đỏ</strong>
+              <span>Nhựa tiết từ sâu cánh kiến ngâm cốt chanh, rượu gạo tạo nền đỏ thẫm.</span>
+            </div>
+            <div class="ingredient-pill">
+              <strong>Nhựa Gáo Dừa</strong>
+              <span>Đốt vỏ gáo dừa khô hứng trên lưỡi dao sắt để lấy chất nhựa đen sánh.</span>
+            </div>
+            <div class="ingredient-pill">
+              <strong>Phèn Đen &amp; Ngũ Bội</strong>
+              <span>Muối sắt tự nhiên phản ứng với tannin giúp khóa màu đen bóng như gương.</span>
+            </div>
+            <div class="ingredient-pill">
+              <strong>Lá Trầu &amp; Vỏ Cau</strong>
+              <span>Dùng đánh sạch răng, làm se nướu và giữ miếng thuốc nhuộm suốt đêm.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 4-Stage Concise Timeline -->
+        <div class="process-stages-panel">
+          <div class="stage-row">
+            <div class="stage-num">I</div>
+            <div class="stage-body">
+              <h4>Cà Răng &amp; Khử Men (Chuẩn Bị)</h4>
+              <p>Chà sạch bề mặt răng bằng vỏ cau khô với muối trắng, ngậm nước cốt chanh hoặc giấm thanh để làm mở nhẹ bề mặt men răng, giúp thuốc bám sâu.</p>
+            </div>
+            <span class="stage-duration">1 – 2 Ngày đầu</span>
+          </div>
+
+          <div class="stage-row">
+            <div class="stage-num">II</div>
+            <div class="stage-body">
+              <h4>Nhuộm Đỏ (Vào Cánh Kiến)</h4>
+              <p>Phết hỗn hợp bột cánh kiến, vỏ lựu đun cô đặc lên lá trầu hoặc bẹ cau, áp sát vào hai hàm răng mỗi tối cho đến khi răng chuyển sang màu đỏ tía trầm.</p>
+            </div>
+            <span class="stage-duration">3 – 4 Đêm</span>
+          </div>
+
+          <div class="stage-row">
+            <div class="stage-num">III</div>
+            <div class="stage-body">
+              <h4>Vào Đen (Phản Ứng Phèn Đen)</h4>
+              <p>Bôi thuốc đen gồm phèn đen hòa cùng bột ngũ bội tử. Phản ứng hóa học tự nhiên biến lớp nền đỏ thẫm hóa sang màu đen nhánh chỉ sau vài đêm.</p>
+            </div>
+            <span class="stage-duration">2 – 3 Đêm</span>
+          </div>
+
+          <div class="stage-row">
+            <div class="stage-num">IV</div>
+            <div class="stage-body">
+              <h4>Giữ Bóng (Lên Nước Hạt Huyền)</h4>
+              <p>Đốt gáo dừa lấy nhựa đen (“nhựa hạt huyền”) quết lên răng để khóa màu. Trong suốt thời gian nhuộm, người nhuộm chỉ nuốt cháo loãng, kiêng nhai đồ cứng và đồ nóng.</p>
+            </div>
+            <span class="stage-duration">Hoàn tất</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPREAD 04: INTERACTIVE TOOTH SIMULATOR & ZINE PACKAGING ARCHIVE -->
+    <section class="magazine-spread" id="spread-interactive">
+      <div class="spread-header">
+        <div>
+          <span class="section-kicker">Chuyên Mục 03 // Trải Nghiệm Tương Tác</span>
+          <h2 class="editorial-headline" style="margin-bottom:0;">Mô Phỏng Sắc Men &amp; Ấn Phẩm <em>Handfan Art</em></h2>
+        </div>
+        <span class="spread-number">SPREAD 04 // INTERACTIVE &amp; ARTIFACT</span>
+      </div>
+
+      <div class="interactive-art-grid">
+        <!-- Left: Interactive Tooth Dyeing Simulator -->
+        <div class="tooth-simulator-card">
+          <div>
+            <span class="meaning-tag">TƯƠNG TÁC TRỰC QUAN</span>
+            <h3 style="font-family: var(--font-serif); font-size: 1.65rem; margin-top: 0.2rem;">
+              Trải Nghiệm Lên Màu Hạt Huyền
+            </h3>
+            <p style="font-size: 0.86rem; color: var(--silver-mid);">
+              Kéo thanh trượt hoặc chọn từng giai đoạn để quan sát sự biến chuyển màu sắc của chiếc răng từ men ngà tự nhiên sang đen nhánh ánh gương.
+            </p>
+          </div>
+
+          <div class="simulator-stage-display">
+            <div class="tooth-visual-box">
+              <img src="assets/art-tooth-detail.png" id="sim-tooth-img" alt="Chiếc răng nhuộm đen" />
+            </div>
+            <div>
+              <span class="meaning-tag" id="sim-stage-code">GIAI ĐOẠN 04 / 04</span>
+              <h4 style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--silver-light); margin: 0.2rem 0;" id="sim-stage-title">
+                Đen Nhánh Hạt Huyền (Hoàn Mỹ)
+              </h4>
+              <p style="font-size: 0.85rem; color: var(--silver-mid);" id="sim-stage-desc">
+                Lớp nhựa gáo dừa khóa chặt bề mặt, tạo độ bóng sâu như hạt na, hạt huyền. Cười lên ánh sắc kiêu sa bên đôi môi đỏ trầu.
+              </p>
+            </div>
+          </div>
+
+          <div class="simulator-controls">
+            <input type="range" min="1" max="4" value="4" step="1" class="sim-slider" id="sim-range-slider" aria-label="Chọn giai đoạn nhuộm răng" />
+            <div class="sim-step-buttons">
+              <button type="button" class="sim-step-btn" data-step="1">1. Men Ngà</button>
+              <button type="button" class="sim-step-btn" data-step="2">2. Cánh Kiến Đỏ</button>
+              <button type="button" class="sim-step-btn" data-step="3">3. Phèn Đen</button>
+              <button type="button" class="sim-step-btn active" data-step="4">4. Hạt Huyền</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Handfan Packaging & Process Illustration -->
+        <div class="packaging-art-card">
+          <div class="packaging-preview">
+            <img src="assets/art-handfan.png" alt="Thiết kế bao bì Handfan Răng Đen Môi Đỏ (@neneneth)" />
+          </div>
+          <div>
+            <span class="meaning-tag">ARTWORK &amp; PACKAGING</span>
+            <h3 style="font-family: var(--font-serif); font-size: 1.55rem; margin: 0.25rem 0 0.5rem;">
+              Ấn Phẩm “Răng Đen Môi Đỏ” Handfan
+            </h3>
+            <p style="font-size: 0.86rem; color: var(--silver-mid); margin-bottom: 1rem;">
+              Lấy cảm hứng từ nền gạch bông xanh lục bảo cổ điển, chuỗi hạt huyền và nét chữ khảm bạc nghệ thuật (<em>@neneneth</em>), dự án tái hiện vẻ đẹp truyền thống qua ngôn ngữ thiết kế đương đại.
+            </p>
+            <div class="archive-photo-box" style="margin-bottom: 0.9rem;">
+              <img src="assets/process-art.jpg" alt="Chưng cất nhựa gáo dừa trên bếp than hồng" style="height: 120px; filter: none;" />
+            </div>
+            <button type="button" class="action-btn-primary" id="btn-card-open-qr" style="width: 100%;">
+              ▣ Mở Mã QR Kết Nối Ấn Phẩm
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       2. GIAO DIỆN ĐIỆN THOẠI & TRẠM QUÉT QR (MOBILE ZINE + QR COMPANION)
+       ==================================================================== -->
+  <section class="mobile-showcase-wrapper" id="mobile-view-section" aria-label="Giao diện điện thoại và mã QR">
+
+    <!-- Left: Interactive Mobile Zine Frame -->
+    <div class="phone-device-frame">
+      <div class="phone-notch-bar">
+        <span>9:41</span>
+        <div class="phone-dynamic-island"></div>
+        <span>5G 100%</span>
+      </div>
+
+      <div class="phone-scroll-screen" id="phone-scroll-container">
+        <!-- Mobile Cover -->
+        <div class="m-hero" id="m-sec-cover">
+          <img src="assets/art-hero.jpg" alt="Bìa tạp chí di động Răng Đen Môi Đỏ" />
+          <div class="m-hero-overlay">
+            <div class="m-top-pill">
+              <span>MOBILE ZINE // NO.01</span>
+              <span style="color: var(--magenta-bright);">● LIVE</span>
+            </div>
+            <div>
+              <span class="m-kicker">Tục Cổ Truyền Việt Nam</span>
+              <div class="m-title-script">Răng đen Môi đỏ</div>
+              <p style="font-size: 0.78rem; color: var(--silver-mid); margin-top: 0.35rem;">
+                “Năm quan mua lấy miệng cười / Mười quan chẳng tiếc, tiếc người răng đen”
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Concise Intro -->
+        <div class="m-section" id="m-sec-meaning">
+          <span class="m-kicker">01 // Ý Nghĩa Thẩm Mỹ</span>
+          <h3 class="m-heading">Mỹ Học “Hạt Huyền”</h3>
+          <p style="font-size: 0.82rem; color: var(--silver-mid); margin-bottom: 0.9rem;">
+            Tục nhuộm răng đen xuất hiện từ thời Văn Lang – Âu Lạc. Hàm răng đen bóng như hạt huyền đi cùng môi đỏ trầu là biểu tượng của sự trưởng thành, duyên dáng và giúp bảo vệ men răng bền chắc.
+          </p>
+
+          <!-- Horizontal Swipe Cards for Mobile -->
+          <div class="m-swipe-cards">
+            <div class="m-swipe-card">
+              <h4>Tương Phản Tuyệt Mỹ</h4>
+              <p>Răng đen nhánh tôn bật sắc môi đỏ ăn trầu và làn da trắng ngần của người phụ nữ Việt.</p>
+            </div>
+            <div class="m-swipe-card">
+              <h4>Nghi Thức Trưởng Thành</h4>
+              <p>Thiếu nữ tuổi cập kê nhuộm răng để khẳng định nền nếp gia phong và sự chín chắn.</p>
+            </div>
+            <div class="m-swipe-card">
+              <h4>Bảo Vệ Răng Nướu</h4>
+              <p>Nhựa cánh kiến, gáo dừa và phèn đen tạo màng sơn tự nhiên chống sâu răng hiệu quả.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Ingredients & 4 Steps -->
+        <div class="m-section" id="m-sec-process">
+          <span class="m-kicker">02 // Bí Thuật Dân Gian</span>
+          <h3 class="m-heading">Nguyên Liệu &amp; 4 Bước Nhuộm</h3>
+          <img src="assets/ingredients-art.jpg" alt="Nguyên liệu nhuộm răng" style="width: 100%; height: 155px; object-fit: cover; border-radius: 12px; margin-bottom: 0.85rem; border: 1px solid var(--border-subtle);" />
+
+          <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.8rem;">
+            <div style="background: rgba(20,60,68,0.6); padding: 0.7rem 0.85rem; border-radius: 10px; border-left: 3px solid var(--gold-accent);">
+              <strong style="color: var(--silver-light);">B1. Khử Men (1–2 ngày):</strong> Chà vỏ cau, ngậm chanh/giấm làm sạch răng.
+            </div>
+            <div style="background: rgba(20,60,68,0.6); padding: 0.7rem 0.85rem; border-radius: 10px; border-left: 3px solid var(--magenta-primary);">
+              <strong style="color: var(--silver-light);">B2. Nhuộm Đỏ (3–4 đêm):</strong> Đắp nhựa cánh kiến đỏ và vỏ lựu lên răng.
+            </div>
+            <div style="background: rgba(20,60,68,0.6); padding: 0.7rem 0.85rem; border-radius: 10px; border-left: 3px solid var(--bg-teal-bright);">
+              <strong style="color: var(--silver-light);">B3. Vào Đen (2–3 đêm):</strong> Phết phèn đen &amp; ngũ bội tử chuyển màu đen.
+            </div>
+            <div style="background: rgba(20,60,68,0.6); padding: 0.7rem 0.85rem; border-radius: 10px; border-left: 3px solid #fff;">
+              <strong style="color: var(--silver-light);">B4. Lên Hạt Huyền:</strong> Quết nhựa đốt từ gáo dừa khô tạo độ bóng gương.
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Art Gallery -->
+        <div class="m-section" id="m-sec-gallery" style="border-bottom: none;">
+          <span class="m-kicker">03 // Bộ Sưu Tập Thị Giác</span>
+          <h3 class="m-heading">Di Sản &amp; Đương Đại</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem;">
+            <img src="assets/art-strip.png" alt="Răng đen môi đỏ strip" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-subtle);" />
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <img src="assets/process-art.jpg" alt="Chưng nhựa gáo dừa" style="width: 100%; height: 86px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-subtle);" />
+              <img src="assets/heritage-art.jpg" alt="Thiếu nữ khăn mỏ quạ" style="width: 100%; height: 86px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-subtle);" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky Mobile Bottom Tab Bar -->
+      <nav class="m-bottom-nav" aria-label="Điều hướng trên điện thoại">
+        <button type="button" class="m-nav-item active" data-target="m-sec-cover">
+          <span>✦</span>
+          <span>Bìa Zine</span>
+        </button>
+        <button type="button" class="m-nav-item" data-target="m-sec-meaning">
+          <span>❖</span>
+          <span>Ý Nghĩa</span>
+        </button>
+        <button type="button" class="m-nav-item" data-target="m-sec-process">
+          <span>◈</span>
+          <span>Quy Trình</span>
+        </button>
+        <button type="button" class="m-nav-item" data-target="m-sec-gallery">
+          <span>▣</span>
+          <span>Nghệ Thuật</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Right: QR Code Exhibition Hub & Instructions -->
+    <div class="mobile-companion-panel">
+      <div class="qr-station-card">
+        <span class="section-kicker">Cơ Chế Hoạt Động // Scan-to-Read</span>
+        <h2 class="editorial-headline" style="margin-bottom: 0.5rem;">
+          Trạm Quét Mã <em>QR</em> Triển Lãm
+        </h2>
+        <p style="font-size: 0.92rem; color: var(--silver-mid);">
+          Người xem dùng camera điện thoại quét mã QR bên dưới (hoặc in trên bao bì quạt cầm tay <strong>Handfan Răng Đen Môi Đỏ</strong>) để mở ngay ấn phẩm tạp chí số tối ưu cho màn hình dọc.
+        </p>
+
+        <div class="qr-station-layout">
+          <div class="qr-poster-box">
+            <div class="qr-white-pad" id="qr-companion-box"></div>
+            <span style="font-family: var(--font-script); font-size: 1.55rem; color: var(--silver-light); display: block; line-height: 1;">
+              Răng đen Môi đỏ
+            </span>
+            <span style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--gold-accent); letter-spacing: 0.14em;">
+              SCAN FOR DIGITAL ZINE
+            </span>
+          </div>
+
+          <div>
+            <h4 style="font-family: var(--font-serif); font-size: 1.35rem; margin-bottom: 0.4rem;">
+              Tùy Chỉnh Đường Dẫn Mã QR
+            </h4>
+            <p style="font-size: 0.82rem; color: var(--silver-mid); margin-bottom: 0.75rem;">
+              Mặc định mã QR trỏ tới địa chỉ mạng nội bộ (Wi-Fi LAN) kèm tham số <code>?view=mobile</code> để điện thoại quét vào thẳng giao diện Mobile Zine. Bạn cũng có thể nhập link bất kỳ:
+            </p>
+
+            <div class="url-input-group">
+              <input type="text" id="qr-url-input" class="url-input" value="https://feel-delight-elect-potential.trycloudflare.com/?view=mobile" aria-label="Đường dẫn tạo mã QR" />
+              <button type="button" class="action-btn-primary" id="btn-update-qr">Cập nhật QR</button>
+            </div>
+
+            <div style="display: flex; gap: 0.65rem; margin-top: 1rem; flex-wrap: wrap;">
+              <button type="button" class="action-btn-primary" id="btn-download-qr-poster">
+                ⬇ Tải Thẻ QR Nghệ Thuật (.PNG)
+              </button>
+              <button type="button" class="qr-trigger-btn" id="btn-reset-lan-url">
+                Đặt lại IP Wi-Fi (192.168.0.91)
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How the Dual-Interface Works Card -->
+      <div class="editorial-lead-card" style="padding: 1.65rem;">
+        <span class="meaning-tag">THIẾT KẾ HAI GIAO DIỆN ĐỒNG BỘ</span>
+        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin: 0.3rem 0 0.75rem;">
+          Tương Thích Trình Chiếu &amp; Quét Di Động
+        </h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.85rem; color: var(--silver-mid);">
+          <div style="background: rgba(7,22,25,0.55); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <strong style="color: var(--magenta-bright); display: block; margin-bottom: 0.25rem;">1. Giao Diện Web (Desktop)</strong>
+            Dàn trang dạng tạp chí nghệ thuật đa cột (Editorial Spread), tích hợp mô phỏng nhuộm răng tương tác và góc quét QR trực tiếp.
+          </div>
+          <div style="background: rgba(7,22,25,0.55); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <strong style="color: var(--gold-accent); display: block; margin-bottom: 0.25rem;">2. Giao Diện Điện Thoại (Mobile)</strong>
+            Tự động kích hoạt khi người xem quét mã QR trên điện thoại — bố cục thẻ lướt (Swipe Zine) cô đọng, thanh điều hướng ngón cái tiện lợi.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====================================================================
+       3. FULL-SCREEN QR EXHIBITION MODAL (FOR SCANNING & DOWNLOADING POSTER)
+       ==================================================================== -->
+  <div class="qr-modal-backdrop" id="qr-modal" role="dialog" aria-modal="true" aria-labelledby="qr-modal-title">
+    <div class="qr-modal-card">
+      <button type="button" class="modal-close-btn" id="btn-close-qr-modal" aria-label="Đóng">✕</button>
+
+      <span class="section-kicker">Exhibition Access // Quét Mã QR</span>
+      <h2 class="editorial-headline" id="qr-modal-title" style="margin-bottom: 0.4rem;">
+        Quét QR Để Bước Vào <em>Răng Đen Môi Đỏ</em>
+      </h2>
+      <p style="font-size: 0.88rem; color: var(--silver-mid); margin-bottom: 1.35rem;">
+        Hướng camera điện thoại vào mã QR bên dưới để mở ấn phẩm tạp chí số, hoặc tải thẻ QR nghệ thuật để in kèm sản phẩm.
+      </p>
+
+      <div class="qr-station-layout" style="margin-top: 0;">
+        <div class="qr-poster-box">
+          <div class="qr-white-pad" id="qr-modal-box"></div>
+          <span style="font-family: var(--font-script); font-size: 1.55rem; color: var(--silver-light); display: block; line-height: 1;">
+            Răng đen Môi đỏ
+          </span>
+          <span style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--gold-accent); letter-spacing: 0.14em;">
+            @NENENETH ART ZINE
+          </span>
+        </div>
+
+        <div>
+          <label for="qr-modal-url-input" class="meaning-tag" style="display: block; margin-bottom: 0.35rem;">
+            ĐƯỜNG DẪN ĐÍCH CỦA MÃ QR:
+          </label>
+          <div class="url-input-group" style="margin-top: 0; margin-bottom: 1rem;">
+            <input type="text" id="qr-modal-url-input" class="url-input" value="https://feel-delight-elect-potential.trycloudflare.com/?view=mobile" />
+            <button type="button" class="action-btn-primary" id="btn-modal-update-qr">Đổi</button>
+          </div>
+
+          <p style="font-size: 0.8rem; color: var(--silver-mid); margin-bottom: 1rem;">
+            💡 <strong>Mẹo trình chiếu:</strong> Nếu điện thoại và máy tính kết nối cùng mạng Wi-Fi, quét mã mặc định (<code>https://feel-delight-elect-potential.trycloudflare.com/?view=mobile</code>) sẽ mở trực tiếp trang web trên điện thoại.
+          </p>
+
+          <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+            <button type="button" class="action-btn-primary" id="btn-modal-download-poster">
+              ⬇ Tải Thẻ QR Nghệ Thuật (.PNG)
+            </button>
+            <button type="button" class="qr-trigger-btn" id="btn-modal-go-mobile">
+              📱 Xem Giao diện Điện thoại
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="zine-footer">
+    <p>RĂNG ĐEN MÔI ĐỎ — TẠP CHÍ SỐ NGHỆ THUẬT GIỚI THIỆU TỤC NHUỘM RĂNG ĐEN CỔ TRUYỀN VIỆT NAM</p>
+    <p style="margin-top: 0.35rem; opacity: 0.75;">Tông màu &amp; Cảm hứng thị giác: “Răng đen Môi đỏ” Handfan Artwork (@neneneth) • Giao diện Kép Web &amp; Mobile QR</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
